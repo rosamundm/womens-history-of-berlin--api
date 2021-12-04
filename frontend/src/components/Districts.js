@@ -14,14 +14,13 @@ class DistrictList extends Component {
             .get("http://127.0.0.1:8000/api/v1/districts/", {
                 method: "GET",
                 headers: {
-                    "Authorization": "Bearer: some_token",
+                    "Authorization": "JWT <access_token>",
                     "Accept" : "application/json", 
                     "Content-Type": "application/json"
                 }
             })
             .then(response => {
-                const districtList = response.data;
-                this.setState({districtList});
+                this.setState({ districtList: response.data});
             })
             .catch(function(error) {
                 console.log(error);
@@ -29,13 +28,16 @@ class DistrictList extends Component {
     }
 
     render () {
+        const districtList = this.state.districtList;
+
         return (
-                Object.keys(this.state.districtList).map(district => (
-                    <ul>{district}</ul>
-                ))
+            <div>
+                {districtList.map((district, i) => (
+                    <ul key={i}>{district.name}</ul>
+                ))}
+            </div>
         )
     }
-
 };
 
 export default DistrictList;
