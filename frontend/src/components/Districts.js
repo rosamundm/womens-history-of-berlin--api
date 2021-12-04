@@ -1,19 +1,41 @@
-import React from "react";
+import axios from "axios";
+import React, { Component } from "react";
 
-const Districts = ({districts}) => {
-    return (
-        <div>
-            <center><h1>Districts</h1></center>
-            {districts.map((district) => (
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{district.name}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{district.id}</h6>
-                    </div>
-                </div>
-            ))}
-        </div>
-    )
+class DistrictList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            districtList: []
+        };
+    }
+
+    componentDidMount() {
+        axios
+            .get("http://127.0.0.1:8000/api/v1/districts/", {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer: some_token",
+                    "Accept" : "application/json", 
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => {
+                const districtList = response.data;
+                this.setState({districtList});
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
+    render () {
+        return (
+                Object.keys(this.state.districtList).map(district => (
+                    <ul>{district}</ul>
+                ))
+        )
+    }
+
 };
 
-export default Districts;
+export default DistrictList;
