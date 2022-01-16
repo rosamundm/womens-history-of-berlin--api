@@ -5,6 +5,7 @@ import DistrictList from "./components/Districts.js";
 import Footer from "./components/layout/Footer.js";
 import Header from "./components/layout/Header.js";
 import HomePage from "./components/Home.js";
+import DistrictInstance from "./components/District.js";
 
 class App extends Component {
     render() {
@@ -15,9 +16,13 @@ class App extends Component {
 
           <Router>
             <Routes>
+
               <Route path="/" element={<HomePage/>}/>
               <Route path="/about" element={<AboutPage/>}/>
+
               <Route path="/districts" element={<DistrictList/>}/>
+              <Route path="/district/:name" element={<DistrictInstance/>}/>
+
             </Routes>
           </Router>
               
