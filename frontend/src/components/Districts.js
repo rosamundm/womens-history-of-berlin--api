@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
-const LOCAL_API_URL = "http://localhost:8000/api/v1/"
+import { LOCAL_API_URL } from "../constants";
 
 class DistrictList extends Component {
     constructor(props) {
@@ -17,7 +16,7 @@ class DistrictList extends Component {
             .get(`${LOCAL_API_URL}districts/`, {
                 method: "GET",
                 headers: {
-                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQyMjgxMTg0LCJpYXQiOjE2NDIyNzc1ODQsImp0aSI6ImEzNjQyZjhjYTg1YjQ5ZTJhMTI5Y2FiMTY5ZDNjYjk0IiwidXNlcl9pZCI6MX0.D7uMSdxjQ4iIfss_nGIqTH909h4FLV9YUn04Z8uxhtk",
+                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQyNTk5NTU3LCJpYXQiOjE2NDI1OTU5NTcsImp0aSI6IjQ4ODM4NjQ2ZWMzYzRhNDBhOGZkNmZkNDdlMDk2NWFkIiwidXNlcl9pZCI6MX0.9mIRv36-Pa5cBaf4omGp4KEOq1931j_B8H9WH1wkUR8",
                     "Accept" : "application/json", 
                     "Content-Type": "application/json"
                 }
@@ -31,6 +30,7 @@ class DistrictList extends Component {
     }
 
     render () {
+
         const districtList = this.state.districtList;
 
         return (
@@ -41,16 +41,17 @@ class DistrictList extends Component {
                   <div>
                     <Link
                       key={i}
-                      to={`/districts/${district.name}`.toLowerCase()}
+                      to={`/districts/${district.name}`}
                     >
                       {district.name}
                     </Link>
                   </div>
                 ))}
-                
+
             </div>
         )
     }
 };
+
 
 export default DistrictList;
