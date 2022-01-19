@@ -4,6 +4,7 @@ from django.db.models.fields import related
 
 class District(models.Model):
     name = models.CharField(max_length=50)
+    slug = models.CharField(max_length=50, default=name)
 
     def __str__(self) -> str:
         return self.name
@@ -16,6 +17,7 @@ class Street(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     name = models.CharField(max_length=50)
+    slug = models.CharField(max_length=50, default=name)
 
     def __str__(self) -> str:
         return self.name

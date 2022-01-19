@@ -4,7 +4,10 @@ from .models import District, Person, Street
 
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        "name",
+        "slug",
+    )
 
 
 @admin.register(Street)

@@ -6,4 +6,4 @@ from rest_framework import routers, serializers
 class DistrictSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = District
-        fields = ["name"]
+        fields = ["id", "name", "slug"]
