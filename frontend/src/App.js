@@ -8,10 +8,12 @@ import Header from "./components/layout/Header.js";
 import HomePage from "./components/Home.js";
 
 class App extends Component {
-    render() {
-      return (
-        <div>
 
+    render() {
+
+      return (
+
+        <div>
           <Header/>  
 
           <Router>
@@ -21,7 +23,7 @@ class App extends Component {
               <Route path="/about" element={<AboutPage/>}/>
 
               <Route path="/districts" element={<DistrictList/>}/>
-              <Route path="/districts/:id" element={<DistrictInstance/>}/>
+              <Route path="/districts/:slug" element={<DistrictInstance/>}/>
 
             </Routes>
           </Router>

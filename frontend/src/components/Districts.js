@@ -1,7 +1,56 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { LOCAL_API_URL } from "../constants";
+import DistrictInstance from "./District";
+
+
+// ***APPROACH 2:***
+
+const DistrictList = () => {
+    const [districtList, setDistricts] = useState([]);
+    const [selectedDistrict, setSelectedDistrict] = useState(null);
+
+    useEffect(() => {
+        
+        (async () => {
+            const response = await fetch(`${LOCAL_API_URL}districts/`, {
+                method: "GET",
+                headers: {
+                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQyNzEyNjk2LCJpYXQiOjE2NDI3MDU0OTYsImp0aSI6IjM2YmRmZTU0NDQzNTQ4YzZiNjFlNjY0MDUxNDE1MDMyIiwidXNlcl9pZCI6MX0.gC5fkyyfWEC9ngglcTcBQ0RQ7p6o3IvlyUnpiJ3mnVA",
+                    "Accept" : "application/json", 
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json();
+            setDistricts(data);
+        })();
+    }, []);
+
+    return (
+        <div>
+                <h1>Districts</h1>
+                
+                {districtList.map(district => (
+
+                <ul>
+                    <li key={district.name}>
+
+                      <Link to={`/districts/${district.slug}`}
+                      onClick={() => setSelectedDistrict(district)}>
+                          {district.name}
+                      </Link>
+
+                    </li>
+                </ul>
+                ))}
+
+        </div>
+    )
+}
+
+/*
+*** APPROACH 1:***
 
 class DistrictList extends Component {
     constructor(props) {
@@ -16,7 +65,7 @@ class DistrictList extends Component {
             .get(`${LOCAL_API_URL}districts/`, {
                 method: "GET",
                 headers: {
-                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQyNTk5NTU3LCJpYXQiOjE2NDI1OTU5NTcsImp0aSI6IjQ4ODM4NjQ2ZWMzYzRhNDBhOGZkNmZkNDdlMDk2NWFkIiwidXNlcl9pZCI6MX0.9mIRv36-Pa5cBaf4omGp4KEOq1931j_B8H9WH1wkUR8",
+                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQyNjI3Mzg1LCJpYXQiOjE2NDI2MjAxODUsImp0aSI6IjFiMTU3NmZkNWQ2MjRmMDg5NjAzYWI4M2YzMWUxYjhhIiwidXNlcl9pZCI6MX0.DFSIA0l-Dl5-b2g-TC_jVorBd6F06JJiTX8B54DuP6E",
                     "Accept" : "application/json", 
                     "Content-Type": "application/json"
                 }
@@ -37,21 +86,20 @@ class DistrictList extends Component {
             <div>
                 <h1>Districts</h1>
 
-                {districtList.map((district, i) => (
-                  <div>
-                    <Link
-                      key={i}
-                      to={`/districts/${district.name}`}
-                    >
+                {districtList.map((district) => (
+
+                  <div key={district.name}>
+                    <Link to={`/districts/${district.slug}`}>
                       {district.name}
                     </Link>
                   </div>
+
                 ))}
 
             </div>
         )
     }
 };
-
+*/
 
 export default DistrictList;
