@@ -5,6 +5,7 @@ from .models import District
 from .serializers import DistrictSerializer
 
 
+# for "/"
 def index(request):
     return render(request, "streets/index.html")
 
@@ -15,4 +16,3 @@ class DistrictViewSet(viewsets.ModelViewSet):
     authentication_class = JWTAuthentication
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None
-
