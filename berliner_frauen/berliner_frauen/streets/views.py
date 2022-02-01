@@ -13,6 +13,7 @@ def index(request):
 class DistrictViewSet(viewsets.ModelViewSet):
     queryset = District.objects.all().order_by("name")
     serializer_class = DistrictSerializer
+    lookup_field = "slug"
     authentication_class = JWTAuthentication
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None
