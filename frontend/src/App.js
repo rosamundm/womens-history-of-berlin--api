@@ -23,7 +23,7 @@ class App extends Component {
               <Route path="/about" element={<AboutPage/>}/>
 
               <Route path="/districts" element={<DistrictList/>}/>
-              <Route path="/districts/:slug" element={<DistrictInstance/>}/>
+              <Route path="/districts/:id" element={<DistrictInstance/>}/>
 
             </Routes>
           </Router>

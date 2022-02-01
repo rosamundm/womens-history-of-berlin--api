@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { LOCAL_API_URL } from "../constants";
 import DistrictInstance from "./District";
@@ -15,7 +15,7 @@ function DistrictList() {
                 method: "GET",
                 headers: {
                     // I know... I committed the token ;)
-                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQzMTQ1MTM0LCJpYXQiOjE2NDMxMzc5MzQsImp0aSI6IjJjZDFmN2ZlMjBiMzQ3MjFiN2JmNzE1ZDZhZDVhZDVmIiwidXNlcl9pZCI6MX0.MLFj6ilCIihT8dcgSP13_4Fys-HQW5gg3O8sKYIX2-M",
+                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQzNzQ3NDc3LCJpYXQiOjE2NDM3NDAyNzcsImp0aSI6ImZmMDBjZDZmNmM4NjQyZTRhMTEzNmYwNGMwMjRhNDcxIiwidXNlcl9pZCI6MX0.d1DbxodnNZMQvQM1wVAlhG4omP4R9Tbzmd8gy0vECrs",
                     "Accept" : "application/json", 
                     "Content-Type": "application/json"
                 }
@@ -34,7 +34,7 @@ function DistrictList() {
             {districtList.map((district) => (
 
               <div key={district.name} onClick={() => setSelectedDistrict(district)}>
-                <Link to={`/districts/${district.slug}`}>
+                <Link to={`/districts/${district.id}`}>
                 {district.name}
                 </Link>
 
