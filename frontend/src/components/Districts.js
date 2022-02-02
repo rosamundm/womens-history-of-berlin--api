@@ -14,8 +14,7 @@ function DistrictList() {
             const response = await fetch(`${LOCAL_API_URL}districts/`, {
                 method: "GET",
                 headers: {
-                    // I know... I committed the token ;)
-                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQzNzQ3NDc3LCJpYXQiOjE2NDM3NDAyNzcsImp0aSI6ImZmMDBjZDZmNmM4NjQyZTRhMTEzNmYwNGMwMjRhNDcxIiwidXNlcl9pZCI6MX0.d1DbxodnNZMQvQM1wVAlhG4omP4R9Tbzmd8gy0vECrs",
+                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQzODM0NTgxLCJpYXQiOjE2NDM4MjczODEsImp0aSI6ImFlOGNhYzE1YzhhMjRiZTY5NGQ4ZTk1OWYyNjNiYmYyIiwidXNlcl9pZCI6MX0._EcZNg9qz2hxSujEOSlutyoPJKNGsy-QBWZALmK3qlQ",
                     "Accept" : "application/json", 
                     "Content-Type": "application/json"
                 }
@@ -24,8 +23,6 @@ function DistrictList() {
             setDistricts(data);
         })();
     }, []);
-
-
 
     return (
         <div>
@@ -41,13 +38,6 @@ function DistrictList() {
               </div>
 
             ))}
-
-            <DistrictInstance district={selectedDistrict} />
-
-            {
-            /* returns null: */
-            console.log(selectedDistrict)
-            } 
 
         </div>
     )
