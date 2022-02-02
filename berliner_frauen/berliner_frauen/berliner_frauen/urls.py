@@ -22,11 +22,13 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
-from streets.views import DistrictViewSet
+from streets.views import CategoryViewSet, DistrictViewSet, StreetViewSet
 
 
 router = routers.DefaultRouter()
+router.register(r"categories", CategoryViewSet)
 router.register(r"districts", DistrictViewSet)
+router.register(r"streets", StreetViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
