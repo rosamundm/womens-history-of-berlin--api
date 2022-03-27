@@ -1,1 +1,2 @@
+export const JWT_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4Mzk3OTYyLCJpYXQiOjE2NDgzOTA3NjIsImp0aSI6Ijc3ZjA2MDNkYzk4ZjRkYjk5MzIzY2Y2NGY1ZjYwMWViIiwidXNlcl9pZCI6MX0.vqfYCd0-ki_spPMBeARTDlWwtOLXys6gWsEDDIG0Ylk";
 export const LOCAL_API_URL = "http://localhost:8000/api/v1/";

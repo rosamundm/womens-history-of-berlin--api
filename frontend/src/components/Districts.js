@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LOCAL_API_URL } from "../constants";
-import DistrictInstance from "./District";
+import { JWT_TOKEN, LOCAL_API_URL } from "../constants";
 
 function DistrictList() {
     
@@ -14,7 +13,7 @@ function DistrictList() {
             const response = await fetch(`${LOCAL_API_URL}districts/`, {
                 method: "GET",
                 headers: {
-                    "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQzODM0NTgxLCJpYXQiOjE2NDM4MjczODEsImp0aSI6ImFlOGNhYzE1YzhhMjRiZTY5NGQ4ZTk1OWYyNjNiYmYyIiwidXNlcl9pZCI6MX0._EcZNg9qz2hxSujEOSlutyoPJKNGsy-QBWZALmK3qlQ",
+                    "Authorization": `JWT ${JWT_TOKEN}`,
                     "Accept" : "application/json", 
                     "Content-Type": "application/json"
                 }
