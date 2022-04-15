@@ -21,7 +21,6 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
-
 from streets.views import CategoryViewSet, DistrictViewSet, StreetViewSet
 
 

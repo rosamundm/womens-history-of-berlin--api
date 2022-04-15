@@ -5,7 +5,11 @@ from rest_framework import serializers
 class DistrictSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = District
-        fields = ["id", "name", "slug"]
+        fields = ["id", "name", "slug", "streets"]
+
+    def to_representation(self, instance):
+        representation = dict()
+        representation["streets"] = instance.streets
 
 
 class StreetSerializer(serializers.HyperlinkedModelSerializer):

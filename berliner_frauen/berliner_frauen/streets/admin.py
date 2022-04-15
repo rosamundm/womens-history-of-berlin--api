@@ -21,6 +21,7 @@ class StreetAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "district",
+        "slug",
     )
 
 

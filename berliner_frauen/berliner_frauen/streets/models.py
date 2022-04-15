@@ -37,7 +37,6 @@ class Category(models.Model):
 
 
 class Person(models.Model):
-
     core_data_added = models.BooleanField()
     entry_complete = models.BooleanField()
     name = models.CharField(max_length=60)

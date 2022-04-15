@@ -28,7 +28,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     pagination_class = None
 
 
-class StreetyViewSet(viewsets.ModelViewSet):
+class StreetViewSet(viewsets.ModelViewSet):
     queryset = Street.objects.all().order_by("name")
     serializer_class = StreetSerializer
     lookup_field = "slug"
