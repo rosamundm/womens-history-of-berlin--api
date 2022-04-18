@@ -2,23 +2,24 @@ from .models import Category, District, Street
 from rest_framework import serializers
 
 
-class DistrictSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = District
-        fields = ["id", "name", "slug", "streets"]
-
-    def to_representation(self, instance):
-        representation = dict()
-        representation["streets"] = instance.streets
-
-
-class StreetSerializer(serializers.HyperlinkedModelSerializer):
+class StreetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Street
         fields = ["id", "name", "slug"]
 
+    def to_representation(self, instance):
+        return instance.name
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
+
+class DistrictSerializer(serializers.ModelSerializer):
+    streets = StreetSerializer(many=True)
+    
+    class Meta:
+        model = District
+        fields = ["id", "name", "slug", "streets"]
+
+
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ["id", "name"]
