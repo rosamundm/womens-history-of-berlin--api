@@ -1,8 +1,13 @@
 from django.shortcuts import render
-from rest_framework import permissions, response, viewsets
+from rest_framework import permissions, viewsets
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .models import Category, District, Street
-from .serializers import CategorySerializer, DistrictSerializer, StreetSerializer
+from .models import Category, District, Person, Street
+from .serializers import (
+    CategorySerializer,
+    DistrictSerializer,
+    PersonSerializer,
+    StreetSerializer
+)
 
 
 # for "/"
@@ -28,8 +33,8 @@ class StreetViewSet(viewsets.ModelViewSet):
     pagination_class = None
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all().order_by("name")
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all().order_by("name")
     serializer_class = CategorySerializer
     lookup_field = "slug"
     authentication_class = JWTAuthentication
@@ -37,3 +42,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
     pagination_class = None
 
 
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all().order_by("name")
+    serializer_class = CategorySerializer
+    lookup_field = "slug"
+    authentication_class = JWTAuthentication
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = None

@@ -5,7 +5,10 @@ from .models import Category, District, Person, Street
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name",)
+    list_display = (
+        "name", 
+        "slug",
+    )
 
 
 @admin.register(District)
@@ -20,6 +23,7 @@ class DistrictAdmin(admin.ModelAdmin):
 class StreetAdmin(admin.ModelAdmin):
     list_display = (
         "name",
+        "eponym",
         "district",
         "slug",
     )
@@ -30,14 +34,16 @@ class PersonAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "street",
+        "category_or_categories",
         "get_district",
         "core_data_added",
         "entry_complete",
     )
 
-    filter_horizontal = ("category",)
+    filter_horizontal = ("category_or_categories",)
 
     def get_district(self, obj):
         return obj.street.district
+
     get_district.short_description = "District"
     get_district.admin_order_field = "street__district"
