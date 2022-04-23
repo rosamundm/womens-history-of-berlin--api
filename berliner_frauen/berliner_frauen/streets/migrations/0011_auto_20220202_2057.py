@@ -6,20 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('streets', '0010_add_slug_field_district_and_street'),
+        ("streets", "0010_add_slug_field_district_and_street"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
             ],
         ),
         migrations.AddField(
-            model_name='person',
-            name='category',
-            field=models.ManyToManyField(to='streets.Category'),
+            model_name="person",
+            name="category",
+            field=models.ManyToManyField(to="streets.Category"),
         ),
     ]
