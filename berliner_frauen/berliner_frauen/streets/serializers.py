@@ -1,4 +1,4 @@
-from .models import District, Person, Street
+from .models import Category, District, Person, Street
 from rest_framework import serializers
 
 
@@ -31,11 +31,6 @@ class DistrictSerializer(serializers.ModelSerializer):
     slug = serializers.SerializerMethodField()
     streets = StreetSerializer(many=True).data
 
-    class Meta:
-        model = District
-        fields = ["id", "name", "slug", "streets"]
-        read_only_fields = fields
-
     def get_slug(self, obj):
         umlaut_map = {
             ord("ä"): "ae",
@@ -44,9 +39,13 @@ class DistrictSerializer(serializers.ModelSerializer):
         }
         return obj.name.translate(umlaut_map).casefold()
 
+    class Meta:
+        model = District
+        fields = ["id", "name", "slug", "streets"]
+        # read_only_fields = fields
+
 
 class PersonSerializer(serializers.ModelSerializer):
-    # category = serializers.SerializerMethodField()
     street = serializers.SerializerMethodField()
 
     class Meta:
@@ -55,7 +54,7 @@ class PersonSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "street",
-            # "category",
+            "category",
             "date_of_birth",
             "date_of_death",
             "place_of_birth",
@@ -63,14 +62,10 @@ class PersonSerializer(serializers.ModelSerializer):
             "description",
         ]
 
-    # def get_category(self, obj):
-    #    return obj.category
-
     def get_street(self, obj):
         return obj.street.name
 
 
-"""
 class CategorySerializer(serializers.ModelSerializer):
 
     people = serializers.SerializerMethodField()
@@ -82,4 +77,3 @@ class CategorySerializer(serializers.ModelSerializer):
 
     def get_people(self, obj):
         return obj.people.all()
-"""

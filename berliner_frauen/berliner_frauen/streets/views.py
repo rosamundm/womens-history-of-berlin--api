@@ -18,7 +18,6 @@ def index(request):
 class DistrictViewSet(viewsets.ModelViewSet):
     queryset = District.objects.all().order_by("name")
     serializer_class = DistrictSerializer
-    lookup_field = "slug"
     authentication_class = JWTAuthentication
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None
@@ -27,7 +26,6 @@ class DistrictViewSet(viewsets.ModelViewSet):
 class StreetViewSet(viewsets.ModelViewSet):
     queryset = Street.objects.all().order_by("name")
     serializer_class = StreetSerializer
-    lookup_field = "slug"
     authentication_class = JWTAuthentication
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None
@@ -35,8 +33,7 @@ class StreetViewSet(viewsets.ModelViewSet):
 
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all().order_by("name")
-    serializer_class = CategorySerializer
-    lookup_field = "slug"
+    serializer_class = PersonSerializer
     authentication_class = JWTAuthentication
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None

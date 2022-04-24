@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from django.contrib import admin
 from .models import Category, District, Person, Street
 
@@ -6,8 +5,7 @@ from .models import Category, District, Person, Street
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
-        "name", 
-        "slug",
+        "name",
     )
 
 
@@ -15,7 +13,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class DistrictAdmin(admin.ModelAdmin):
     list_display = (
         "name",
-        "slug",
     )
 
 
@@ -25,7 +22,6 @@ class StreetAdmin(admin.ModelAdmin):
         "name",
         "eponym",
         "district",
-        "slug",
     )
 
 
@@ -34,16 +30,15 @@ class PersonAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "street",
-        "category_or_categories",
         "get_district",
         "core_data_added",
         "entry_complete",
     )
 
-    filter_horizontal = ("category_or_categories",)
-
     def get_district(self, obj):
         return obj.street.district
+
+    filter_horizontal = ("category",)
 
     get_district.short_description = "District"
     get_district.admin_order_field = "street__district"

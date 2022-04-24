@@ -1,9 +1,45 @@
 from django.db import models
 
 
+class Category(models.Model):
+    """
+    Category of the person's occupation or what they
+    were known for
+    """
+
+    name = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "categories"
+
+
+class Person(models.Model):
+    core_data_added = models.BooleanField()
+    entry_complete = models.BooleanField()
+    name = models.CharField(max_length=60)
+    date_of_birth = models.DateField(null=True, blank=True)
+    date_of_death = models.DateField(null=True, blank=True)
+    place_of_birth = models.CharField(max_length=50, null=True, blank=True)
+    place_of_death = models.CharField(max_length=50, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    category = models.ManyToManyField(
+        Category,
+        related_name="people",
+        blank=True,
+    )
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "People"
+
+
 class District(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.CharField(max_length=50, default=name)
 
     def __str__(self) -> str:
         return self.name
@@ -16,49 +52,7 @@ class Street(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     name = models.CharField(max_length=50)
-    slug = models.CharField(max_length=50, default=name)
+    eponym = models.OneToOneField(Person, on_delete=models.CASCADE, null=True)
 
     def __str__(self) -> str:
         return self.name
-
-
-class Person(models.Model):
-    core_data_added = models.BooleanField()
-    entry_complete = models.BooleanField()
-    name = models.CharField(max_length=60)
-    street = models.OneToOneField(
-        Street, on_delete=models.CASCADE, primary_key=True, related_name="eponym"
-    )
-    date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField(null=True, blank=True)
-    place_of_birth = models.CharField(max_length=50, null=True, blank=True)
-    place_of_death = models.CharField(max_length=50, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-
-    def __str__(self) -> str:
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "People"
-
-
-class Category(models.Model):
-    """
-    Category of the person's occupation or what they
-    were known for
-    """
-
-    name = models.CharField(max_length=50)
-    people = models.ManyToManyField(
-        Person,
-        related_name="category_or_categories",
-        blank=True,
-        null=True
-    )
-    slug = models.CharField(max_length=50, default=name)
-
-    def __str__(self) -> str:
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "categories"
