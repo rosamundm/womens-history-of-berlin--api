@@ -41,6 +41,7 @@ class PersonSerializer(serializers.ModelSerializer):
             "place_of_birth",
             "place_of_death",
             "description",
+            "slug",
         ]
 
     def get_street(self, obj):
@@ -56,4 +57,5 @@ class CategorySerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
     def get_people(self, obj):
-        return obj.people.all()
+        return [person.slug for person in obj.people.all()]
+

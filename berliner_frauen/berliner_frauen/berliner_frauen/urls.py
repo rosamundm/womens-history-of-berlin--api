@@ -7,11 +7,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
-from streets.views import DistrictViewSet, PersonViewSet, StreetViewSet
+from streets.views import CategoryViewSet, DistrictViewSet, PersonViewSet, StreetViewSet
 
 
 router = routers.DefaultRouter()
-# router.register(r"categories", CategoryViewSet)
+router.register(r"categories", CategoryViewSet)
 router.register(r"districts", DistrictViewSet)
 router.register(r"people", PersonViewSet)
 router.register(r"streets", StreetViewSet)
@@ -19,7 +19,7 @@ router.register(r"streets", StreetViewSet)
 district_router = routers.NestedSimpleRouter(router, r"districts", lookup="district")
 district_router.register("streets", StreetViewSet, basename="streets")
 district_router.register("person", PersonViewSet, basename="person")
-# district_router.register("category", CategoryViewSet, basename="category")
+district_router.register("category", CategoryViewSet, basename="category")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
