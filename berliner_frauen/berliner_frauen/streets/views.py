@@ -36,6 +36,7 @@ class StreetViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all().order_by("name")
     serializer_class = PersonSerializer
+    lookup_field = "slug"
     authentication_class = JWTAuthentication
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = None

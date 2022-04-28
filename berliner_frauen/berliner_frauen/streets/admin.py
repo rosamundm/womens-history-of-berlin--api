@@ -4,7 +4,7 @@ from .models import Category, District, Person, Street
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name",)
+    list_display = ("name", "slug",)
 
 
 @admin.register(District)
@@ -30,6 +30,7 @@ class PersonAdmin(admin.ModelAdmin):
         "get_district",
         "core_data_added",
         "entry_complete",
+        "slug",
     )
 
     def get_district(self, obj):
