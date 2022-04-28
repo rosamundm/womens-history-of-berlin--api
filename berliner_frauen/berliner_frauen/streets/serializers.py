@@ -5,7 +5,6 @@ from rest_framework import serializers
 class StreetSerializer(serializers.ModelSerializer):
     district = serializers.SerializerMethodField()
     eponym = serializers.SerializerMethodField()
-    slug = serializers.SerializerMethodField()
 
     class Meta:
         model = Street
@@ -18,31 +17,13 @@ class StreetSerializer(serializers.ModelSerializer):
     def get_eponym(self, obj):
         return obj.eponym.name
 
-    def get_slug(self, obj):
-        umlaut_map = {
-            ord("ä"): "ae",
-            ord("ö"): "oe",
-            ord("ü"): "ue"
-        }
-        return obj.name.translate(umlaut_map).casefold()
-
 
 class DistrictSerializer(serializers.ModelSerializer):
-    slug = serializers.SerializerMethodField()
     streets = StreetSerializer(many=True).data
-
-    def get_slug(self, obj):
-        umlaut_map = {
-            ord("ä"): "ae",
-            ord("ö"): "oe",
-            ord("ü"): "ue"
-        }
-        return obj.name.translate(umlaut_map).casefold()
 
     class Meta:
         model = District
         fields = ["id", "name", "slug", "streets"]
-        # read_only_fields = fields
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -67,7 +48,6 @@ class PersonSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-
     people = serializers.SerializerMethodField()
 
     class Meta:

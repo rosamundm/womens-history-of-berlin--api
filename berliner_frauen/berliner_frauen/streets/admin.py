@@ -4,16 +4,12 @@ from .models import Category, District, Person, Street
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-    )
+    list_display = ("name",)
 
 
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-    )
+    list_display = ("name", "slug",)
 
 
 @admin.register(Street)
@@ -22,6 +18,7 @@ class StreetAdmin(admin.ModelAdmin):
         "name",
         "eponym",
         "district",
+        "slug",
     )
 
 

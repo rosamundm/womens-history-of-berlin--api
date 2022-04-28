@@ -40,6 +40,13 @@ class Person(models.Model):
 
 class District(models.Model):
     name = models.CharField(max_length=50)
+    slug = models.CharField(max_length=50, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        umlaut_map = {ord("ä"): "ae", ord("ö"): "oe", ord("ü"): "ue"}
+        if self.slug is None:
+            self.slug = self.name.translate(umlaut_map).casefold()
+        super(District, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.name
@@ -53,6 +60,13 @@ class Street(models.Model):
     longitude = models.FloatField(null=True, blank=True)
     name = models.CharField(max_length=50)
     eponym = models.OneToOneField(Person, on_delete=models.CASCADE, null=True)
+    slug = models.CharField(max_length=50, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        umlaut_map = {ord("ä"): "ae", ord("ö"): "oe", ord("ü"): "ue"}
+        if self.slug is None:
+            self.slug = self.name.translate(umlaut_map).casefold()
+        super(Street, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.name
