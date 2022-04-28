@@ -47,6 +47,6 @@ for letter in string.ascii_uppercase:
                 mitte_streets_named_after_people.append(street)
 
         for street in mitte_streets_named_after_people:
-            street = (str(street["name"] + "\n"))
+            street = str(street["name"] + "\n")
             with open("test.txt", "a") as file:
                 file.write(street)
