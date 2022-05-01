@@ -42,9 +42,9 @@ class Person(models.Model):
             ord("ä"): "ae",
             ord("Ä"): "ae",
             ord("ö"): "oe",
-            ord("Ö"): "oe",  
+            ord("Ö"): "oe",
             ord("ü"): "ue",
-            ord("Ü"): "ue", 
+            ord("Ü"): "ue",
         }
         self.slug = self.name.translate(umlaut_map).casefold()
         self.slug = self.slug.replace(" ", "-")
@@ -66,9 +66,9 @@ class District(models.Model):
             ord("ä"): "ae",
             ord("Ä"): "ae",
             ord("ö"): "oe",
-            ord("Ö"): "oe",  
+            ord("Ö"): "oe",
             ord("ü"): "ue",
-            ord("Ü"): "ue", 
+            ord("Ü"): "ue",
         }
         self.slug = self.name.translate(umlaut_map).casefold()
         super(District, self).save(*args, **kwargs)
@@ -92,9 +92,9 @@ class Street(models.Model):
             ord("ä"): "ae",
             ord("Ä"): "ae",
             ord("ö"): "oe",
-            ord("Ö"): "oe",  
+            ord("Ö"): "oe",
             ord("ü"): "ue",
-            ord("Ü"): "ue", 
+            ord("Ü"): "ue",
         }
         self.slug = self.name.translate(umlaut_map).casefold()
         super(Street, self).save(*args, **kwargs)

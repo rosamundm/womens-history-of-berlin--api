@@ -1,3 +1,4 @@
+from unicodedata import name
 from .models import Category, District, Person, Street
 from rest_framework import serializers
 
@@ -19,11 +20,14 @@ class StreetSerializer(serializers.ModelSerializer):
 
 
 class DistrictSerializer(serializers.ModelSerializer):
-    streets = StreetSerializer(many=True).data
+    streets = serializers.SerializerMethodField()
 
     class Meta:
         model = District
         fields = ["id", "name", "slug", "streets"]
+
+    def get_streets(self, obj):
+        return obj.streets.all().values("id", "name", "slug")
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -58,4 +62,3 @@ class CategorySerializer(serializers.ModelSerializer):
 
     def get_people(self, obj):
         return [person.slug for person in obj.people.all()]
-

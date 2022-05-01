@@ -8,55 +8,111 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
             ],
             options={
-                'verbose_name_plural': 'categories',
+                "verbose_name_plural": "categories",
             },
         ),
         migrations.CreateModel(
-            name='District',
+            name="District",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('slug', models.CharField(max_length=50)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
+                ("slug", models.CharField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
-            name='Person',
+            name="Person",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('core_data_added', models.BooleanField()),
-                ('entry_complete', models.BooleanField()),
-                ('name', models.CharField(max_length=60)),
-                ('date_of_birth', models.DateField(blank=True, null=True)),
-                ('date_of_death', models.DateField(blank=True, null=True)),
-                ('place_of_birth', models.CharField(blank=True, max_length=50, null=True)),
-                ('place_of_death', models.CharField(blank=True, max_length=50, null=True)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('category', models.ManyToManyField(blank=True, related_name='people', to='streets.Category')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("core_data_added", models.BooleanField()),
+                ("entry_complete", models.BooleanField()),
+                ("name", models.CharField(max_length=60)),
+                ("date_of_birth", models.DateField(blank=True, null=True)),
+                ("date_of_death", models.DateField(blank=True, null=True)),
+                (
+                    "place_of_birth",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
+                (
+                    "place_of_death",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
+                ("description", models.TextField(blank=True, null=True)),
+                (
+                    "category",
+                    models.ManyToManyField(
+                        blank=True, related_name="people", to="streets.Category"
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'People',
+                "verbose_name_plural": "People",
             },
         ),
         migrations.CreateModel(
-            name='Street',
+            name="Street",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('latitude', models.FloatField(blank=True, null=True)),
-                ('longitude', models.FloatField(blank=True, null=True)),
-                ('name', models.CharField(max_length=50)),
-                ('district', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='streets', to='streets.district')),
-                ('eponym', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='streets.person')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("latitude", models.FloatField(blank=True, null=True)),
+                ("longitude", models.FloatField(blank=True, null=True)),
+                ("name", models.CharField(max_length=50)),
+                (
+                    "district",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="streets",
+                        to="streets.district",
+                    ),
+                ),
+                (
+                    "eponym",
+                    models.OneToOneField(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="streets.person",
+                    ),
+                ),
             ],
         ),
     ]

@@ -4,12 +4,18 @@ from .models import Category, District, Person, Street
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug",)
+    list_display = (
+        "name",
+        "slug",
+    )
 
 
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug",)
+    list_display = (
+        "name",
+        "slug",
+    )
 
 
 @admin.register(Street)
