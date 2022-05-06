@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import AboutPage from "./components/About.js";
+import PersonInstance from "./components/Person.js";
 import DistrictInstance from "./components/District.js";
 import DistrictList from "./components/Districts.js";
 import StreetInstance from "./components/Street.js";
@@ -26,6 +27,8 @@ class App extends Component {
               <Route path="/districts" element={<DistrictList/>}/>
               <Route path="/districts/:district_slug" element={<DistrictInstance/>}/>
               <Route path="/districts/:district_slug/:street_slug" element={<StreetInstance/>}/>
+
+              <Route path="/person/:person_slug" element={<PersonInstance/>}/>
 
             </Routes>
           </Router>

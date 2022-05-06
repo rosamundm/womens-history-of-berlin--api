@@ -9,7 +9,6 @@ function StreetInstance() {
     const streetSlug = street_slug;
 
     const [streetInstance, setStreetInstance] = useState(null);
-
     const streetInstanceURL = `${LOCAL_API_URL}districts/${districtSlug}/streets/${streetSlug}`
 
     useEffect(() => {

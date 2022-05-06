@@ -7,12 +7,8 @@ function DistrictInstance() {
     let { district_slug, street_slug } = useParams();
     const districtSlug = district_slug;
     const streetSlug = street_slug;
-
     const [districtInstance, setDistrictInstance] = useState(null);
-    // const [streetList, setStreets] = useState(null);
-
     const [selectedStreet, setSelectedStreet] = useState(null);
-
     const districtInstanceURL = `${LOCAL_API_URL}districts/${districtSlug}`
 
     useEffect(() => {
@@ -53,7 +49,6 @@ return (
                             {street.name}
                         </Link>
                     </div>
-
                   ))}
                 
               </div>
