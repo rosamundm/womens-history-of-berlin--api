@@ -30,7 +30,7 @@ function DistrictList() {
             {districtList.map((district) => (
 
               <div key={district.name} onClick={() => setSelectedDistrict(district)}>
-                <Link to={`/districts/${district.id}`}>
+                <Link to={`/districts/${district.district_slug}`}>
                 {district.name}
                 </Link>
 
