@@ -6,7 +6,7 @@ from .models import Category, District, Person, Street
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         "name",
-        "slug",
+        "category_slug",
     )
 
 
@@ -14,7 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class DistrictAdmin(admin.ModelAdmin):
     list_display = (
         "name",
-        "slug",
+        "district_slug",
     )
 
 
@@ -24,7 +24,7 @@ class StreetAdmin(admin.ModelAdmin):
         "name",
         "eponym",
         "district",
-        "slug",
+        "street_slug",
     )
 
 
@@ -36,7 +36,7 @@ class PersonAdmin(admin.ModelAdmin):
         "get_district",
         "core_data_added",
         "entry_complete",
-        "slug",
+        "person_slug",
     )
 
     def get_district(self, obj):

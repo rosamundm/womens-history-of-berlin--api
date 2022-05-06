@@ -8,10 +8,10 @@ class Category(models.Model):
     """
 
     name = models.CharField(max_length=50)
-    slug = models.CharField(max_length=50, blank=True, null=True)
+    category_slug = models.CharField(max_length=50, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        self.slug = self.name.replace(" & ", "-").casefold()
+        self.category_slug = self.name.replace(" & ", "-").casefold()
         super(Category, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -35,7 +35,7 @@ class Person(models.Model):
         related_name="people",
         blank=True,
     )
-    slug = models.CharField(max_length=50, blank=True, null=True)
+    person_slug = models.CharField(max_length=50, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         umlaut_map = {
@@ -46,8 +46,8 @@ class Person(models.Model):
             ord("ü"): "ue",
             ord("Ü"): "ue",
         }
-        self.slug = self.name.translate(umlaut_map).casefold()
-        self.slug = self.slug.replace(" ", "-")
+        self.person_slug = self.name.translate(umlaut_map).casefold()
+        self.person_slug = self.person_slug.replace(" ", "-")
         super(Person, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -59,7 +59,7 @@ class Person(models.Model):
 
 class District(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.CharField(max_length=50, blank=True, null=True)
+    district_slug = models.CharField(max_length=50, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         umlaut_map = {
@@ -70,7 +70,7 @@ class District(models.Model):
             ord("ü"): "ue",
             ord("Ü"): "ue",
         }
-        self.slug = self.name.translate(umlaut_map).casefold()
+        self.district_slug = self.name.translate(umlaut_map).casefold()
         super(District, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -85,7 +85,7 @@ class Street(models.Model):
     longitude = models.FloatField(null=True, blank=True)
     name = models.CharField(max_length=50)
     eponym = models.OneToOneField(Person, on_delete=models.CASCADE, null=True)
-    slug = models.CharField(max_length=50, blank=True, null=True)
+    street_slug = models.CharField(max_length=50, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         umlaut_map = {
@@ -96,7 +96,7 @@ class Street(models.Model):
             ord("ü"): "ue",
             ord("Ü"): "ue",
         }
-        self.slug = self.name.translate(umlaut_map).casefold()
+        self.street_slug = self.name.translate(umlaut_map).casefold()
         super(Street, self).save(*args, **kwargs)
 
     def __str__(self) -> str:

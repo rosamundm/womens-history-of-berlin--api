@@ -9,7 +9,7 @@ class StreetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Street
-        fields = ["id", "name", "district", "eponym", "slug"]
+        fields = ["id", "name", "district", "eponym", "street_slug"]
         read_only_fields = fields
 
     def get_district(self, obj):
@@ -24,10 +24,10 @@ class DistrictSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = District
-        fields = ["id", "name", "slug", "streets"]
+        fields = ["id", "name", "district_slug", "streets"]
 
     def get_streets(self, obj):
-        return obj.streets.all().values("id", "name", "slug")
+        return obj.streets.all().values("id", "name", "street_slug")
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -45,7 +45,7 @@ class PersonSerializer(serializers.ModelSerializer):
             "place_of_birth",
             "place_of_death",
             "description",
-            "slug",
+            "person_slug",
         ]
 
     def get_street(self, obj):
@@ -57,8 +57,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ["id", "name", "slug", "people"]
+        fields = ["id", "name", "category_slug", "people"]
         read_only_fields = fields
 
     def get_people(self, obj):
-        return [person.slug for person in obj.people.all()]
+        return [person.person_slug for person in obj.people.all()]
