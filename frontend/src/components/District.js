@@ -49,7 +49,7 @@ return (
                 
                   {districtInstance.streets.map((street) => ( 
                     <div key={street.name} onClick={() => setSelectedStreet(street)}>
-                        <Link to={`/districts/${street.street_slug}`}>
+                        <Link to={`/districts/${districtInstance.district_slug}/${street.street_slug}`}>
                             {street.name}
                         </Link>
                     </div>
@@ -58,9 +58,9 @@ return (
                 
               </div>
               
-              <div>
+              <div className="back-to-list">
                 <Link to={"/districts/"}>
-                 Back to list
+                 Back to district list
                 </Link>
               </div>
     
