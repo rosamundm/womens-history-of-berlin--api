@@ -1,48 +1,24 @@
 from django.contrib import admin
-from .models import Category, District, Person, Street
-
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-        "category_slug",
-    )
+from .models import District, Street
 
 
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
     list_display = (
         "name",
-        "district_slug",
+        "added_street_count",
     )
+
+    def added_street_count(self, obj):
+        return obj.streets.count()
 
 
 @admin.register(Street)
 class StreetAdmin(admin.ModelAdmin):
     list_display = (
         "name",
-        "eponym",
         "district",
-        "street_slug",
+        "eponym_name",
+        "eponym_core_data_added",
+        "entry_complete"
     )
-
-
-@admin.register(Person)
-class PersonAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-        "street",
-        "get_district",
-        "core_data_added",
-        "entry_complete",
-        "person_slug",
-    )
-
-    def get_district(self, obj):
-        return obj.street.district
-
-    filter_horizontal = ("category",)
-
-    get_district.short_description = "District"
-    get_district.admin_order_field = "street__district"

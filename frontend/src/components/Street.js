@@ -36,13 +36,26 @@ function StreetInstance() {
     }
 
     return (
+
         <div>
-                <h2>{streetInstance.name}</h2>
-                 
-                  <div>
-                    <strong>District:</strong> {streetInstance.district}
-                    <br></br>
-                    <strong>Eponym:</strong> {streetInstance.eponym}                       
+                <h2>
+                    <a href={streetInstance.map_link}>
+                      {streetInstance.name}
+                    </a>
+                </h2>
+                
+                  <div className="eponym-basic-info">
+                    Named for <strong>{streetInstance.eponym_name}</strong>
+                     <br>
+                     </br>
+                    Born on {streetInstance.eponym_date_of_birth} in {streetInstance.eponym_place_of_birth}
+                     <br>
+                     </br>
+                    Died on {streetInstance.eponym_date_of_death} in {streetInstance.eponym_place_of_death}, aged x
+                  </div>
+
+                  <div className="eponym-description">
+                      {streetInstance.eponym_description}
                   </div>
                   
                   <div className="back-to-list">

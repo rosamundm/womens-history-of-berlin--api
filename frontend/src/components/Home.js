@@ -4,9 +4,9 @@ class HomePage extends Component {
     render () {
         return (
             <div>
-                Search by district:
+                Search by district: {/* dropdown */}
                   <br></br>
-                Search by person:
+                Search by street: {/* search bar */}
             </div>
         )
     }
