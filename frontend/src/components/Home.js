@@ -1,20 +1,24 @@
-import React from "react";
-import Header from "./layout/Header";
+import DistrictList from "./Districts";
+import Dropdown from "react-dropdown";
 
 function HomePage() {
   return (
 
     <div className="landing" class="px-20 justify-center justify-self-center	max-w-4xl m-auto">
 
-        <div className="description">
-          <p class="py-10 font-sans text-center">
-            Search by district: {/* DistrictDropdown */}
-              <br></br>
-            Search by street: {/* StreetSearch */}
-          </p>
-        </div>
+        <div className="search">
 
-      </div>
+          <div className="district-search" class="py-10 font-sans text-center">
+            Select a district:
+            <DistrictList />
+          </div>
+
+          <div className="street-search" class="py-10 font-sans text-center"></div>
+            Search by street: 
+            {/* StreetSearch */}
+          </div>
+
+    </div>
 
   )
 }

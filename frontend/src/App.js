@@ -24,7 +24,7 @@ class App extends Component {
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/about" element={<AboutPage/>}/>
 
-                <Route path="/districts" element={<DistrictList/>}/>
+                {/*<Route path="/districts" element={<DistrictList/>}/>*/}
                 <Route path="/districts/:district_slug" element={<DistrictInstance/>}/>
                 <Route path="/districts/:district_slug/:street_slug" element={<StreetInstance/>}/>
 
