@@ -14,25 +14,26 @@ class App extends Component {
 
       return (
 
-        <div>
-          <Header/>  
+          <main className="text-indigo-800 bg-teal-100 body-font min-h-screen">
 
-          <Router>
-            <Routes>
+            <Header/>  
 
-              <Route path="/" element={<HomePage/>}/>
-              <Route path="/about" element={<AboutPage/>}/>
+            <Router>
+              <Routes>
 
-              <Route path="/districts" element={<DistrictList/>}/>
-              <Route path="/districts/:district_slug" element={<DistrictInstance/>}/>
-              <Route path="/districts/:district_slug/:street_slug" element={<StreetInstance/>}/>
+                <Route path="/" element={<HomePage/>}/>
+                <Route path="/about" element={<AboutPage/>}/>
 
-            </Routes>
-          </Router>
+                <Route path="/districts" element={<DistrictList/>}/>
+                <Route path="/districts/:district_slug" element={<DistrictInstance/>}/>
+                <Route path="/districts/:district_slug/:street_slug" element={<StreetInstance/>}/>
+
+              </Routes>
+            </Router>
               
-          <Footer/>
+            <Footer/>
 
-        </div>
+          </main>
 
       )
     }
