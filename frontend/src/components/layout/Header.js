@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 function Header() {
     return (
-        <div className="header" class="font-sans text-2xl py-10 text-center">
-           <h1>Berliner Frauen</h1>
-           <h3>A project dedicated to women's legacy on Berlin's streets</h3>
-        </div>
+       <div className="header" class="p-5 font-sans text-3xl py-10 text-left">
+         <a href="/">
+           Berliner Frauen: a project dedicated to women's legacy on Berlin's streets
+         </a>
+       </div>
     )
 };
 

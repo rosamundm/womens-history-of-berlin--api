@@ -1,5 +1,7 @@
-import DistrictList from "./Districts";
+// import DistrictList from "./Districts";
 import Dropdown from "react-dropdown";
+import DistrictList from "./Districts";
+import StreetSearch from "./StreetSearch";
 
 function HomePage() {
   return (
@@ -8,15 +10,18 @@ function HomePage() {
 
         <div className="search">
 
-          <div className="district-search" class="py-10 font-sans text-center">
-            Select a district:
+          <div className="district-list">
             <DistrictList />
           </div>
 
-          <div className="street-search" class="py-10 font-sans text-center"></div>
-            Search by street: 
-            {/* StreetSearch */}
-          </div>
+
+           <div className="street-search" class="py-10 font-sans text-center">
+             <StreetSearch />
+           </div>
+
+        </div>
+
+
 
     </div>
 
