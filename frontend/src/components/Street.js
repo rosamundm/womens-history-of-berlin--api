@@ -55,7 +55,11 @@ function StreetInstance() {
                   
           <div className="back-to-list" class="p-2 bg-violet-300">
             <Link to={`/districts/${districtSlug}`}>
-               Back to street list
+               Back to street list for this district
+            </Link>
+            <br></br>
+            <Link to={"/"}>
+              See all districts
             </Link>
           </div>
         

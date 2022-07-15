@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { JWT_TOKEN, LOCAL_API_URL } from "../constants";
+import { JWT_TOKEN, LOCAL_API_URL } from "../../constants";
 
-function DistrictList() {
+function DistrictGrid() {
     
     const [districtList, setDistricts] = useState([]);
     const [selectedDistrict, setSelectedDistrict] = useState(null);
@@ -52,4 +52,4 @@ function DistrictList() {
     )
 }
 
-export default DistrictList;
+export default DistrictGrid;

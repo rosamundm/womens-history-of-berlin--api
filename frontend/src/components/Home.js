@@ -1,6 +1,6 @@
-// import DistrictList from "./Districts";
+// import DistrictBrowser from "./Districts";
 import Dropdown from "react-dropdown";
-import DistrictList from "./Districts";
+import DistrictGrid from "./layout/DistrictGrid";
 import StreetSearch from "./StreetSearch";
 
 function HomePage() {
@@ -10,8 +10,8 @@ function HomePage() {
 
         <div className="search">
 
-          <div className="district-list">
-            <DistrictList />
+          <div className="district-grid">
+            <DistrictGrid />
           </div>
 
 
