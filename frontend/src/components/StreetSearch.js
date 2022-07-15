@@ -41,12 +41,14 @@ function StreetSearch() {
           >
           </input>
 
+
           <div>
             {data &&
               data.map((item) =>(
                 item.name.toLowerCase().slice(0,3) === searchQuery.slice(0,3)
-                ? <Link 
-                    to={`/districts/${item.district.district_slug}/${item.street_slug}`}>{item.name}
+                ? 
+                <Link 
+                  to={`/districts/${item.district_slug}/${item.street_slug}`}>{item.name}
                 </Link>
                 : null
               ))

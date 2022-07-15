@@ -16,6 +16,7 @@ class DistrictSerializer(serializers.ModelSerializer):
 
 class StreetSerializer(serializers.ModelSerializer):
     district = serializers.SerializerMethodField()
+    district_slug = serializers.SerializerMethodField()
 
     class Meta:
         model = Street
@@ -23,6 +24,7 @@ class StreetSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "district",
+            "district_slug",
             "street_slug",
             "map_link",
             "eponym_name",
@@ -37,4 +39,5 @@ class StreetSerializer(serializers.ModelSerializer):
     def get_district(self, obj):
         return obj.district.name
 
-
+    def get_district_slug(self, obj):
+        return obj.district.district_slug
