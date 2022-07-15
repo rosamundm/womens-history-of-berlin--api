@@ -1,18 +1,62 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { JWT_TOKEN, LOCAL_API_URL } from "../constants";
+
 function StreetSearch() {
-    return (
-        <div class="flex items-center justify-center">
-          <div class="flex border-2 rounded">
-            <input type="text" class="px-4 py-2 w-80" placeholder=" Search by street"></input>
-            <button class="flex items-center justify-center px-4 border-l">
-            <svg class="w-6 h-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24">
-                <path
-                    d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
-            </svg>
-            </button>
+
+  const [data, setData] = useState([]);  // fetched data
+  const [searchQuery, setSearchQuery] = useState(""); // value of search field
+
+  const fetchData = () => {
+    fetch(`${LOCAL_API_URL}streets/`, {
+      method: "GET",
+      headers: {
+        "Authorization": `JWT ${JWT_TOKEN}`,
+        "Accept" : "application/json", 
+        "Content-Type": "application/json"
+      }
+    })
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.log("Error fetching data"))
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function handleChange(event) {
+    setSearchQuery(event.target.value);
+  }
+
+  return (
+      <div className="flex items-center justify-center">
+        <div className="flex border-2 rounded">
+          <input 
+            type="text" 
+            className="px-4 py-2 w-80" 
+            placeholder="Search by street"
+            value={searchQuery}
+            onChange={handleChange}
+          >
+          </input>
+
+          <div>
+            {data &&
+              data.map((item) =>(
+                item.name.toLowerCase().slice(0,3) === searchQuery.slice(0,3)
+                ? <Link 
+                    to={`/districts/${item.district.district_slug}/${item.street_slug}`}>{item.name}
+                </Link>
+                : null
+              ))
+            }
+
+
           </div>
         </div>
-    )
-}
+      </div>
+  )
+};
 
 export default StreetSearch;
