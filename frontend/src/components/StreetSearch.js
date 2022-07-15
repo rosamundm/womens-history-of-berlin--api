@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { JWT_TOKEN, LOCAL_API_URL } from "../constants";
 
-function StreetSearch() {
+export default function StreetSearch() {
 
   const [data, setData] = useState([]);  // fetched data
   const [searchQuery, setSearchQuery] = useState(""); // value of search field
@@ -60,5 +60,3 @@ function StreetSearch() {
       </div>
   )
 };
-
-export default StreetSearch;

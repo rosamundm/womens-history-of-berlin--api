@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { JWT_TOKEN, LOCAL_API_URL } from "../constants";
 import { Link, useParams } from "react-router-dom";
+import Header from "./layout/Header";
 
 function StreetInstance() {
 
@@ -38,6 +39,7 @@ function StreetInstance() {
     return (
 
         <div class="container p-8 bg-slate-100">
+
           <div className="street-title" class="p-5 text-2xl bg-sky-100">
               <a href={streetInstance.map_link}>
                 {streetInstance.name}
@@ -58,8 +60,8 @@ function StreetInstance() {
                Back to street list for this district
             </Link>
             <br></br>
-            <Link to={"/"}>
-              See all districts
+            <Link to={"/districts/"}>
+               Back to district list
             </Link>
           </div>
         

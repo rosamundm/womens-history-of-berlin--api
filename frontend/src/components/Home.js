@@ -1,12 +1,13 @@
-// import DistrictBrowser from "./Districts";
-import Dropdown from "react-dropdown";
-import DistrictGrid from "./layout/DistrictGrid";
+import DistrictGrid from "./DistrictGrid";
 import StreetSearch from "./StreetSearch";
+import HomepageHeader from "./layout/HomepageHeader";
 
-function HomePage() {
+export default function HomePage() {
   return (
 
     <div className="landing" class="px-20 justify-center justify-self-center	max-w-4xl m-auto">
+
+      <HomepageHeader />
 
         <div className="search">
 
@@ -21,11 +22,7 @@ function HomePage() {
 
         </div>
 
-
-
     </div>
 
   )
-}
-
-export default HomePage;
+};

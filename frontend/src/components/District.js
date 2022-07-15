@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { JWT_TOKEN, LOCAL_API_URL } from "../constants";
 import { Link, useParams } from "react-router-dom";
+import Navbar from "./layout/Navbar";
 
-function DistrictInstance() {
+export default function DistrictInstance() {
 
     let { district_slug, street_slug } = useParams();
     const districtSlug = district_slug;
@@ -36,14 +37,18 @@ if (!districtInstance) {
 }
 
 return (
-    <div>
-            <h2>{districtInstance.name}</h2>
-             
-              <div>
 
-                <h3>Streets in {districtInstance.name}</h3>
+    <div class="container p-8 bg-slate-100">
+
+        <div className="navbar">
+            <Navbar />
+        </div>
+
+            <div class="p-6 text-4xl">{districtInstance.name}</div>
+             
+              <div className="street-list" class="p-8">
                 
-                  {districtInstance.streets.map((street) => ( 
+                  {districtInstance.streets.map((street) => (
                     <div key={street.name} onClick={() => setSelectedStreet(street)}>
                         <Link to={`/districts/${districtInstance.district_slug}/${street.street_slug}`}>
                             {street.name}
@@ -60,7 +65,4 @@ return (
               </div>
     
     </div>
-);
-}
-
-export default DistrictInstance;
+)};

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { JWT_TOKEN, LOCAL_API_URL } from "../../constants";
+import { JWT_TOKEN, LOCAL_API_URL } from "../constants";
 
-function DistrictGrid() {
+export default function DistrictGrid() {
     
     const [districtList, setDistricts] = useState([]);
     const [selectedDistrict, setSelectedDistrict] = useState(null);
@@ -28,9 +28,6 @@ function DistrictGrid() {
     return (
 
         <div class="p-8 bg-violet-300">
-          <div class="heading">
-            <p class="text-2xl text-center">Browse by district:</p>
-          </div>  
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
               {districtList.map((district) => (
                 <div 
@@ -50,6 +47,4 @@ function DistrictGrid() {
         </div>
             
     )
-}
-
-export default DistrictGrid;
+};
