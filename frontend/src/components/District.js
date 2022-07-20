@@ -44,12 +44,13 @@ return (
             <Navbar />
         </div>
 
-            <div class="p-6 text-4xl">{districtInstance.name}</div>
+            <div class="p-6 text-6xl">{districtInstance.name}</div>
              
               <div className="street-list" class="p-8">
-                
                   {districtInstance.streets.map((street) => (
-                    <div key={street.name} onClick={() => setSelectedStreet(street)}>
+                    <div 
+                      className="text-3xl p-3"
+                        key={street.name} onClick={() => setSelectedStreet(street)}>
                         <Link to={`/districts/${districtInstance.district_slug}/${street.street_slug}`}>
                             {street.name}
                         </Link>

@@ -4,16 +4,13 @@ import AboutPage from "./components/About.js";
 import DistrictBrowser from "./components/DistrictBrowser.js";
 import DistrictInstance from "./components/District.js";
 import StreetInstance from "./components/Street.js";
-import Footer from "./components/layout/Footer.js";
-import Header from "./components/layout/Header.js";
-import HomepageHeader from "./components/layout/HomepageHeader.js";
 import HomePage from "./components/Home.js";
 
 export default function App() {
 
       return (
 
-          <main className="text-indigo-800 bg-teal-100 body-font min-h-screen">
+          <main className="text-indigo-800 bg-teal-100 body-font min-h-screen flex items-center justify-center">
 
             <Router>
               <Routes>
@@ -28,8 +25,9 @@ export default function App() {
               </Routes>
             </Router>
               
-            <Footer/>
+            { /* <Footer/> */ }
 
           </main>
+
       )
 };

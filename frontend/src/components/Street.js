@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { JWT_TOKEN, LOCAL_API_URL } from "../constants";
 import { Link, useParams } from "react-router-dom";
-import Header from "./layout/Header";
+import Navbar from "./layout/Navbar";
 
 function StreetInstance() {
 
@@ -40,14 +40,18 @@ function StreetInstance() {
 
         <div class="container p-8 bg-slate-100">
 
-          <div className="street-title" class="p-5 text-2xl bg-sky-100">
+          <div className="navbar">
+            <Navbar />
+          </div>
+
+          <div className="street-title" class="p-6 text-6xl bg-sky-100">
               <a href={streetInstance.map_link}>
                 {streetInstance.name}
               </a>
-              <div className="eponym-basic-info" class="p-5 text-lg bg-sky-100">
-                Named for {streetInstance.eponym_name}, born on {streetInstance.eponym_date_of_birth} {" "}
-                in {streetInstance.eponym_place_of_birth}, {" "}
-                died on {streetInstance.eponym_date_of_death} in {streetInstance.eponym_place_of_death}
+              <div className="eponym-basic-info" class="p-5 text-2xl bg-sky-100">
+                <b>Named for</b> {streetInstance.eponym_name}<b>, born on</b> {streetInstance.eponym_date_of_birth} {" "}
+                <b>in</b> {streetInstance.eponym_place_of_birth}<b>, {" "}
+                died on</b> {streetInstance.eponym_date_of_death} in {streetInstance.eponym_place_of_death}
               </div>
           </div>
             
@@ -55,16 +59,12 @@ function StreetInstance() {
             {streetInstance.eponym_description}
           </div>
                   
-          <div className="back-to-list" class="p-2 bg-violet-300">
+          <div className="back-to-list" class="p-2 bg-violet-300 text-xl">
             <Link to={`/districts/${districtSlug}`}>
-               Back to street list for this district
-            </Link>
-            <br></br>
-            <Link to={"/districts/"}>
-               Back to district list
+               See more streets in {streetInstance.district}
             </Link>
           </div>
-        
+
         </div>
     );
 }
