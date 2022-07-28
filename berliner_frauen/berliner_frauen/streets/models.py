@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 
 class District(models.Model):
@@ -43,7 +44,8 @@ class Street(models.Model):
         null=True,
         blank=True
     )
-    eponym_description = models.TextField(null=True, blank=True)
+    eponym_description = HTMLField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
         umlaut_map = {
