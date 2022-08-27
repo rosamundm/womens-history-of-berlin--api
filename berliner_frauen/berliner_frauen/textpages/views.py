@@ -11,7 +11,7 @@ environ.Env.read_env()
 
 
 def home(request):
-    return redirect(env("API_ROOT"))
+    return redirect(env("LOCAL_API_ROOT"))
 
 
 class TextPageViewSet(viewsets.ModelViewSet):

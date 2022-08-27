@@ -20,7 +20,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOST = [env("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware"
 ]
 
 ROOT_URLCONF = "berliner_frauen.urls"

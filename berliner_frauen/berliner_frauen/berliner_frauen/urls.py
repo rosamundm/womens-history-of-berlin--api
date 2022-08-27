@@ -9,23 +9,29 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView,
 )
-from streets.views import DistrictViewSet, StreetViewSet
-# from textpages.views import TextPageViewSet
+from streets import views as streets_views
+from textpages import views as textpage_views
 
 
 router = routers.DefaultRouter()
-router.register(r"districts", DistrictViewSet)
-router.register(r"streets", StreetViewSet)
-# router.register(r"textpages", TextPageViewSet)
+router.register(r"districts", streets_views.DistrictViewSet)
+router.register(r"streets", streets_views.StreetViewSet)
+router.register(r"textpages", textpage_views.TextPageViewSet)
 
 district_router = routers.NestedSimpleRouter(
     router,
     r"districts",
     lookup="district"
 )
-district_router.register("streets", StreetViewSet, basename="streets")
+district_router.register(
+    "streets",
+    streets_views.StreetViewSet,
+    basename="streets"
+)
 
 urlpatterns = [
+    path("", textpage_views.home, name="home"),
+
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
 
