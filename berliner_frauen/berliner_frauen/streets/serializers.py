@@ -33,6 +33,7 @@ class StreetSerializer(serializers.ModelSerializer):
             "eponym_place_of_birth",
             "eponym_place_of_death",
             "eponym_description",
+            "image",
         ]
         read_only_fields = fields
 

@@ -1,13 +1,7 @@
-from django.shortcuts import render
 from rest_framework import filters, permissions, viewsets
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import District, Street
 from .serializers import DistrictSerializer, StreetSerializer
-
-
-# for "/"
-def index(request):
-    return render(request, "streets/index.html")
 
 
 class DistrictViewSet(viewsets.ModelViewSet):
