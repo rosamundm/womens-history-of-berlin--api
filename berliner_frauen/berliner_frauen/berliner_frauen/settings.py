@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "streets",
-    # "textpages",
+    "textpages",
 
     "corsheaders",
     "django_extensions",
