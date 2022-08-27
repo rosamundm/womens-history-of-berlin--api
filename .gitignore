@@ -2,3 +2,7 @@
 .DS_Store
 __pycache__
 *.sqlite3
+media/
+static/
+
+local_settings.py
