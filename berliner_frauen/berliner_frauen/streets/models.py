@@ -45,7 +45,12 @@ class Street(models.Model):
         blank=True
     )
     eponym_description = HTMLField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.URLField(
+        max_length=200,
+        null=True,
+        blank=True
+    )
+    image_available = models.BooleanField()
 
     def save(self, *args, **kwargs):
         umlaut_map = {

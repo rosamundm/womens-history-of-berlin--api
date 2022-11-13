@@ -20,5 +20,6 @@ class StreetAdmin(admin.ModelAdmin):
         "district",
         "eponym_name",
         "eponym_core_data_added",
-        "entry_complete"
+        "entry_complete",
+        "image_available",
     )
