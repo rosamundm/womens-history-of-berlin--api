@@ -11,7 +11,11 @@ class DistrictSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
     def get_streets(self, obj):
-        return obj.streets.all().values("id", "name", "street_slug")
+        return (
+            obj.streets.all()
+            .values("id", "name", "street_slug")
+            .order_by("name")
+        )
 
 
 class StreetSerializer(serializers.ModelSerializer):
