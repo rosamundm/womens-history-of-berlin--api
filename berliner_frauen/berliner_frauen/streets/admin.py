@@ -23,3 +23,5 @@ class StreetAdmin(admin.ModelAdmin):
         "entry_complete",
         "image_available",
     )
+
+    ordering = ["name",]
