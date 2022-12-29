@@ -22,7 +22,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
 
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -39,7 +38,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "tinymce",
-    "cloudinary",
 ]
 
 MIDDLEWARE = [
@@ -85,7 +83,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -173,7 +170,6 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # X_FRAME_OPTIONS = "SAMEORIGIN"
-
 
 # false in dev, true in prod
 CSRF_COOKIE_SECURE = False
