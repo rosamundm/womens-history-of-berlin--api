@@ -15,6 +15,7 @@ class DistrictSerializer(serializers.ModelSerializer):
             obj.streets.all()
             .values("id", "name", "street_slug")
             .order_by("name")
+            .exclude(entry_complete=False)
         )
 
 

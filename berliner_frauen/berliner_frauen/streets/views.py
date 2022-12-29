@@ -16,7 +16,7 @@ class DistrictViewSet(viewsets.ModelViewSet):
 
 
 class StreetViewSet(viewsets.ModelViewSet):
-    queryset = Street.objects.all().order_by("name")
+    queryset = Street.objects.all().filter(entry_complete=True).order_by("name")
     serializer_class = StreetSerializer
     lookup_field = "street_slug"
     authentication_class = JWTAuthentication
