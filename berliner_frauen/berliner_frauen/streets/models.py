@@ -6,6 +6,18 @@ class District(models.Model):
     name = models.CharField(max_length=50)
     district_slug = models.CharField(max_length=50, blank=True, null=True)
 
+    @property
+    def number_of_added_streets(self):
+        return self.streets.count()
+  
+    @property
+    def number_of_completed_streets(self):
+        return len([
+            street
+            for street in self.streets.all()
+            if street.entry_complete
+        ])
+
     def save(self, *args, **kwargs):
         umlaut_map = {
             ord("ä"): "ae",

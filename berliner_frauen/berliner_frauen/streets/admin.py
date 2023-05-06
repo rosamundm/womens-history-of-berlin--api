@@ -6,11 +6,9 @@ from .models import District, Street
 class DistrictAdmin(admin.ModelAdmin):
     list_display = (
         "name",
-        "added_street_count",
+        "number_of_added_streets",
+        "number_of_completed_streets",
     )
-
-    def added_street_count(self, obj):
-        return obj.streets.count()
 
 
 @admin.register(Street)
@@ -24,4 +22,4 @@ class StreetAdmin(admin.ModelAdmin):
         "image_available",
     )
 
-    ordering = ["name",]
+    ordering = ("name",)

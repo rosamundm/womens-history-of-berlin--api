@@ -7,7 +7,14 @@ class DistrictSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = District
-        fields = ["id", "name", "district_slug", "streets"]
+        fields = (
+            "id",
+            "name",
+            "district_slug",
+            "number_of_added_streets",
+            "number_of_completed_streets",
+            "streets",
+        )
         read_only_fields = fields
 
     def get_streets(self, obj):
@@ -25,7 +32,7 @@ class StreetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Street
-        fields = [
+        fields = (
             "id",
             "name",
             "district",
@@ -39,7 +46,7 @@ class StreetSerializer(serializers.ModelSerializer):
             "eponym_place_of_death",
             "eponym_description",
             "image",
-        ]
+        )
         read_only_fields = fields
 
     def get_district(self, obj):
