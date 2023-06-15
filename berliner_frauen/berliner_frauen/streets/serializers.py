@@ -14,6 +14,7 @@ class DistrictSerializer(serializers.ModelSerializer):
             "number_of_added_streets",
             "number_of_completed_streets",
             "streets",
+            "image_path"
         )
         read_only_fields = fields
 

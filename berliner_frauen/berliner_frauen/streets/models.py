@@ -4,6 +4,7 @@ from tinymce.models import HTMLField
 
 class District(models.Model):
     name = models.CharField(max_length=50)
+    image_path = models.CharField(max_length=50, blank=True, null=True)
     district_slug = models.CharField(max_length=50, blank=True, null=True)
 
     @property
