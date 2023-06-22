@@ -10,13 +10,11 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 from streets import views as streets_views
-from textpages import views as textpage_views
 
 
 router = routers.DefaultRouter()
 router.register(r"districts", streets_views.DistrictViewSet)
 router.register(r"streets", streets_views.StreetViewSet)
-router.register(r"textpages", textpage_views.TextPageViewSet)
 
 district_router = routers.NestedSimpleRouter(
     router,
@@ -30,7 +28,6 @@ district_router.register(
 )
 
 urlpatterns = [
-    path("", textpage_views.home, name="home"),
 
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
