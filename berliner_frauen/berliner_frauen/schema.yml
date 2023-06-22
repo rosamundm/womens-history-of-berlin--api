@@ -1,0 +1,792 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /api/v1/districts/:
+    get:
+      operationId: districts_list
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - districts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/District'
+          description: ''
+    post:
+      operationId: districts_create
+      tags:
+      - districts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/District'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/District'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/District'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/District'
+          description: ''
+  /api/v1/districts/{district_district_slug}/streets/:
+    get:
+      operationId: districts_streets_list
+      parameters:
+      - in: path
+        name: district_district_slug
+        schema:
+          type: string
+        required: true
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - districts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Street'
+          description: ''
+    post:
+      operationId: districts_streets_create
+      parameters:
+      - in: path
+        name: district_district_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Street'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Street'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Street'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Street'
+          description: ''
+  /api/v1/districts/{district_district_slug}/streets/{street_slug}/:
+    get:
+      operationId: districts_streets_retrieve
+      parameters:
+      - in: path
+        name: district_district_slug
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: street_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Street'
+          description: ''
+    put:
+      operationId: districts_streets_update
+      parameters:
+      - in: path
+        name: district_district_slug
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: street_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Street'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Street'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Street'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Street'
+          description: ''
+    patch:
+      operationId: districts_streets_partial_update
+      parameters:
+      - in: path
+        name: district_district_slug
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: street_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStreet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStreet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStreet'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Street'
+          description: ''
+    delete:
+      operationId: districts_streets_destroy
+      parameters:
+      - in: path
+        name: district_district_slug
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: street_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/districts/{district_slug}/:
+    get:
+      operationId: districts_retrieve
+      parameters:
+      - in: path
+        name: district_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/District'
+          description: ''
+    put:
+      operationId: districts_update
+      parameters:
+      - in: path
+        name: district_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/District'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/District'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/District'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/District'
+          description: ''
+    patch:
+      operationId: districts_partial_update
+      parameters:
+      - in: path
+        name: district_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDistrict'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDistrict'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDistrict'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/District'
+          description: ''
+    delete:
+      operationId: districts_destroy
+      parameters:
+      - in: path
+        name: district_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - districts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/streets/:
+    get:
+      operationId: streets_list
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - streets
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Street'
+          description: ''
+    post:
+      operationId: streets_create
+      tags:
+      - streets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Street'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Street'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Street'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Street'
+          description: ''
+  /api/v1/streets/{street_slug}/:
+    get:
+      operationId: streets_retrieve
+      parameters:
+      - in: path
+        name: street_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - streets
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Street'
+          description: ''
+    put:
+      operationId: streets_update
+      parameters:
+      - in: path
+        name: street_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - streets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Street'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Street'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Street'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Street'
+          description: ''
+    patch:
+      operationId: streets_partial_update
+      parameters:
+      - in: path
+        name: street_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - streets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStreet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStreet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStreet'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Street'
+          description: ''
+    delete:
+      operationId: streets_destroy
+      parameters:
+      - in: path
+        name: street_slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - streets
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/token-auth/:
+    post:
+      operationId: token_auth_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - token-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/v1/token-refresh/:
+    post:
+      operationId: token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - token-refresh
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/v1/token-verify/:
+    post:
+      operationId: token_verify_create
+      description: |-
+        Takes a token and indicates if it is valid.  This view provides no
+        information about a token's fitness for a particular use.
+      tags:
+      - token-verify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenVerify'
+          description: ''
+components:
+  schemas:
+    District:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        district_slug:
+          type: string
+          readOnly: true
+          nullable: true
+        number_of_added_streets:
+          type: string
+          readOnly: true
+        number_of_completed_streets:
+          type: string
+          readOnly: true
+        streets:
+          type: string
+          readOnly: true
+        image_path:
+          type: string
+          readOnly: true
+          nullable: true
+      required:
+      - district_slug
+      - id
+      - image_path
+      - name
+      - number_of_added_streets
+      - number_of_completed_streets
+      - streets
+    PatchedDistrict:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        district_slug:
+          type: string
+          readOnly: true
+          nullable: true
+        number_of_added_streets:
+          type: string
+          readOnly: true
+        number_of_completed_streets:
+          type: string
+          readOnly: true
+        streets:
+          type: string
+          readOnly: true
+        image_path:
+          type: string
+          readOnly: true
+          nullable: true
+    PatchedStreet:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        district:
+          type: string
+          readOnly: true
+        district_slug:
+          type: string
+          readOnly: true
+        street_slug:
+          type: string
+          readOnly: true
+          nullable: true
+        map_link:
+          type: string
+          format: uri
+          readOnly: true
+        eponym_name:
+          type: string
+          readOnly: true
+        eponym_date_of_birth:
+          type: string
+          format: date
+          readOnly: true
+          nullable: true
+        eponym_date_of_death:
+          type: string
+          format: date
+          readOnly: true
+          nullable: true
+        eponym_place_of_birth:
+          type: string
+          readOnly: true
+          nullable: true
+        eponym_place_of_death:
+          type: string
+          readOnly: true
+          nullable: true
+        eponym_description:
+          type: string
+          readOnly: true
+          nullable: true
+        image:
+          type: string
+          format: uri
+          readOnly: true
+          nullable: true
+    Street:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        district:
+          type: string
+          readOnly: true
+        district_slug:
+          type: string
+          readOnly: true
+        street_slug:
+          type: string
+          readOnly: true
+          nullable: true
+        map_link:
+          type: string
+          format: uri
+          readOnly: true
+        eponym_name:
+          type: string
+          readOnly: true
+        eponym_date_of_birth:
+          type: string
+          format: date
+          readOnly: true
+          nullable: true
+        eponym_date_of_death:
+          type: string
+          format: date
+          readOnly: true
+          nullable: true
+        eponym_place_of_birth:
+          type: string
+          readOnly: true
+          nullable: true
+        eponym_place_of_death:
+          type: string
+          readOnly: true
+          nullable: true
+        eponym_description:
+          type: string
+          readOnly: true
+          nullable: true
+        image:
+          type: string
+          format: uri
+          readOnly: true
+          nullable: true
+      required:
+      - district
+      - district_slug
+      - eponym_date_of_birth
+      - eponym_date_of_death
+      - eponym_description
+      - eponym_name
+      - eponym_place_of_birth
+      - eponym_place_of_death
+      - id
+      - image
+      - map_link
+      - name
+      - street_slug
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+      - access
+      - refresh
+    TokenVerify:
+      type: object
+      properties:
+        token:
+          type: string
+          writeOnly: true
+      required:
+      - token
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "JWT"
