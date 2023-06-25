@@ -1,5 +1,6 @@
 from .models import District, Street
 from rest_framework import serializers
+from taggit.serializers import TagListSerializerField, TaggitSerializer
 
 
 class DistrictSerializer(serializers.ModelSerializer):
@@ -27,9 +28,10 @@ class DistrictSerializer(serializers.ModelSerializer):
         )
 
 
-class StreetSerializer(serializers.ModelSerializer):
+class StreetSerializer(serializers.ModelSerializer, TaggitSerializer):
     district = serializers.SerializerMethodField()
     district_slug = serializers.SerializerMethodField()
+    tags = TagListSerializerField()
 
     class Meta:
         model = Street
@@ -47,6 +49,7 @@ class StreetSerializer(serializers.ModelSerializer):
             "eponym_place_of_death",
             "eponym_description",
             "image",
+            "tags",
         )
         read_only_fields = fields
 

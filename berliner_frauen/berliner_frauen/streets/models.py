@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+from taggit.managers import TaggableManager
 
 
 class District(models.Model):
@@ -10,7 +11,7 @@ class District(models.Model):
     @property
     def number_of_added_streets(self):
         return self.streets.count()
-  
+
     @property
     def number_of_completed_streets(self):
         return len([
@@ -64,6 +65,7 @@ class Street(models.Model):
         blank=True
     )
     image_available = models.BooleanField()
+    tags = TaggableManager()
 
     def save(self, *args, **kwargs):
         umlaut_map = {

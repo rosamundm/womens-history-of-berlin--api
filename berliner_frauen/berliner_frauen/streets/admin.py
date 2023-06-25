@@ -20,6 +20,13 @@ class StreetAdmin(admin.ModelAdmin):
         "eponym_core_data_added",
         "entry_complete",
         "image_available",
+        "tag_list"
     )
 
     ordering = ("name",)
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related("tags")
+
+    def tag_list(self, obj):
+        return u", ".join(tag.name for tag in obj.tags.all())

@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "tinymce",
-    "drf_spectacular"
+    "drf_spectacular",
+    "taggit",
 ]
 
 MIDDLEWARE = [
