@@ -16,7 +16,9 @@ class DistrictAdmin(admin.ModelAdmin):
             divided = (
                 obj.number_of_completed_streets / obj.number_of_added_streets
             )
-            return f"{divided * 100}%"
+            percentage = divided * 100
+            percentage = round(percentage, 2)
+            return f"{percentage}%"
         except ZeroDivisionError:
             return "Unknown"
 
@@ -25,7 +27,9 @@ class DistrictAdmin(admin.ModelAdmin):
             divided = (
                 obj.number_of_photos_taken / obj.number_of_added_streets
             )
-            return f"{divided * 100}%"
+            percentage = divided * 100
+            percentage = round(percentage, 2)
+            return f"{percentage}%"
         except ZeroDivisionError:
             return "Unknown"
 
@@ -34,7 +38,9 @@ class DistrictAdmin(admin.ModelAdmin):
             divided = (
                 obj.number_of_completed_streets / obj.number_of_photos_taken
             )
-            return f"{divided * 100}%"
+            percentage = divided * 100
+            percentage = round(percentage, 2)
+            return f"{percentage}%"
         except ZeroDivisionError:
             return "Unknown"
 
