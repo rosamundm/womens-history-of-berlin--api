@@ -14,11 +14,11 @@ class District(models.Model):
 
     @property
     def number_of_completed_streets(self):
-        return len([
-            street
-            for street in self.streets.all()
-            if street.entry_complete
-        ])
+        return self.streets.filter(entry_complete=True).count()
+
+    @property
+    def number_of_photos_taken(self):
+        return self.streets.filter(image_available=True).count()
 
     def save(self, *args, **kwargs):
         umlaut_map = {
@@ -66,6 +66,7 @@ class Street(models.Model):
     )
     image_available = models.BooleanField()
     tags = TaggableManager()
+    last_edited = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         umlaut_map = {

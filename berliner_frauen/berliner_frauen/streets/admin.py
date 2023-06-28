@@ -6,9 +6,37 @@ from .models import District, Street
 class DistrictAdmin(admin.ModelAdmin):
     list_display = (
         "name",
-        "number_of_added_streets",
-        "number_of_completed_streets",
+        "entries_completed",
+        "entries_with_photos_taken",
+        "complete_from_available_photos",
     )
+
+    def entries_completed(self, obj):
+        try:
+            divided = (
+                obj.number_of_completed_streets / obj.number_of_added_streets
+            )
+            return f"{divided * 100}%"
+        except ZeroDivisionError:
+            return "Unknown"
+
+    def entries_with_photos_taken(self, obj):
+        try:
+            divided = (
+                obj.number_of_photos_taken / obj.number_of_added_streets
+            )
+            return f"{divided * 100}%"
+        except ZeroDivisionError:
+            return "Unknown"
+
+    def complete_from_available_photos(self, obj):
+        try:
+            divided = (
+                obj.number_of_completed_streets / obj.number_of_photos_taken
+            )
+            return f"{divided * 100}%"
+        except ZeroDivisionError:
+            return "Unknown"
 
 
 @admin.register(Street)
@@ -20,7 +48,8 @@ class StreetAdmin(admin.ModelAdmin):
         "eponym_core_data_added",
         "entry_complete",
         "image_available",
-        "tag_list"
+        "tag_list",
+        "last_edited",
     )
 
     ordering = ("name",)
