@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from tinymce.models import HTMLField
 
@@ -10,15 +11,5 @@ class BlogPost(models.Model):
     ready_to_publish = models.BooleanField()
 
     def save(self, *args, **kwargs):
-        umlaut_map = {
-            ord("ä"): "ae",
-            ord("Ä"): "ae",
-            ord("ö"): "oe",
-            ord("Ö"): "oe",
-            ord("ü"): "ue",
-            ord("Ü"): "ue",
-        }
-        self.slug = (
-            self.title.translate(umlaut_map).replace(" ", "-").casefold()
-        )
+        self.slug = str(uuid.uuid4())
         super(BlogPost, self).save(*args, **kwargs)
