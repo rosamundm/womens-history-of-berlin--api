@@ -9,11 +9,13 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 from streets import views as streets_views
+from blog import views as blog_views
 
 
 router = routers.DefaultRouter()
 router.register(r"districts", streets_views.DistrictViewSet)
 router.register(r"streets", streets_views.StreetViewSet)
+router.register(r"blog", blog_views.BlogPostViewSet)
 
 district_router = routers.NestedSimpleRouter(
     router,
