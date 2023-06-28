@@ -58,6 +58,8 @@ class StreetAdmin(admin.ModelAdmin):
         "last_edited",
     )
 
+    list_filter = ("district", "entry_complete", "image_available")
+
     ordering = ("name",)
 
     def get_queryset(self, request):
