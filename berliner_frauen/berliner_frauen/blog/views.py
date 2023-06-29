@@ -5,7 +5,9 @@ from .serializers import BlogPostSerializer
 
 
 class BlogPostViewSet(viewsets.ModelViewSet):
-    queryset = BlogPost.objects.all().order_by("-published")
+    queryset = (
+        BlogPost.objects.filter(ready_to_publish=True).order_by("-published")
+    )
     serializer_class = BlogPostSerializer
     lookup_field = "slug"
     authentication_class = JWTAuthentication
