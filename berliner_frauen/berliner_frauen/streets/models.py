@@ -29,7 +29,9 @@ class District(models.Model):
             ord("ü"): "ue",
             ord("Ü"): "ue",
         }
-        self.district_slug = self.name.translate(umlaut_map).casefold()
+        self.district_slug = self.name.translate(umlaut_map) \
+            .replace(" ", "-") \
+            .casefold()
         super(District, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -77,7 +79,9 @@ class Street(models.Model):
             ord("ü"): "ue",
             ord("Ü"): "ue",
         }
-        self.street_slug = self.name.translate(umlaut_map).casefold()
+        self.street_slug = self.name.translate(umlaut_map) \
+            .replace(" ", "-") \
+            .casefold()
         super(Street, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
