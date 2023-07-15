@@ -4,7 +4,11 @@ from taggit.serializers import TagListSerializerField, TaggitSerializer
 
 
 class DistrictSerializer(serializers.ModelSerializer):
-    streets = serializers.SerializerMethodField()
+    streets = serializers.SlugRelatedField(
+        many=True,
+        slug_field="street_slug",
+        queryset=Street.objects.all()
+    )
 
     class Meta:
         model = District
@@ -18,14 +22,6 @@ class DistrictSerializer(serializers.ModelSerializer):
             "image_path"
         )
         read_only_fields = fields
-
-    def get_streets(self, obj):
-        return (
-            obj.streets.all()
-            .values("id", "name", "street_slug")
-            .order_by("name")
-            .exclude(entry_complete=False)
-        )
 
 
 class StreetSerializer(serializers.ModelSerializer, TaggitSerializer):
