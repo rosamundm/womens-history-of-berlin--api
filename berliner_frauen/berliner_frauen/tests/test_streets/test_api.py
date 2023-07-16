@@ -199,3 +199,111 @@ def test__district_is_read_only__delete(api_request, api_url, api_user):
 
     assert response.status_code == 403
     assert "DELETE operation not possible via API" == data["message"]
+
+
+@pytest.mark.django_db
+def test__street_is_read_only__post(api_request, api_url, api_user):
+
+    street = StreetFactory.create()
+
+    view = StreetViewSet.as_view(actions={"post": "create"})
+
+    request = api_request.post(
+        f"{api_url}districts/",
+        content_type="application/json",
+        data=json.dumps(
+            {
+                "name": street.name,
+                "district": street.district_id,
+                "map_link": street.map_link,
+                "eponym_name": street.eponym_name,
+                "eponym_date_of_birth": str(street.eponym_date_of_birth),
+                "eponym_date_of_death": str(street.eponym_date_of_death),
+                "eponym_place_of_birth": street.eponym_place_of_birth,
+                "eponym_place_of_death": street.eponym_place_of_death,
+                "image": street.image,
+                "image_available": street.image_available,
+                "eponym_core_data_added": street.eponym_core_data_added,
+                "entry_complete": street.entry_complete,
+                "tags": street.tags
+            }
+        )
+    )
+    
+    force_authenticate(request, user=api_user)
+    response = view(request)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 403
+    assert "POST operation not possible via API" == data["message"]
+
+
+@pytest.mark.django_db
+def test__street_is_read_only__put(api_request, api_url, api_user):
+
+    street = StreetFactory.create()
+
+    view = StreetViewSet.as_view(actions={"put": "update"})
+
+    request = api_request.put(
+        f"{api_url}streets/",
+        content_type="application/json",
+        data=json.dumps(
+            {
+                "name": "Neuer-Name-Straße",
+                "image_path": "picture.jpeg"
+            }
+        )
+    )
+    
+    force_authenticate(request, user=api_user)
+    response = view(request, street_slug=street.street_slug)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 403
+    assert "PUT operation not possible via API" == data["message"]
+
+
+@pytest.mark.django_db
+def test__street_is_read_only__patch(api_request, api_url, api_user):
+
+    street = StreetFactory.create()
+
+    view = StreetViewSet.as_view(actions={"patch": "partial_update"})
+
+    request = api_request.patch(
+        f"{api_url}streets/",
+        content_type="application/json",
+        data=json.dumps({"name": "Neuer-Name-Straße"})
+    )
+    
+    force_authenticate(request, user=api_user)
+    response = view(request, street_slug=street.street_slug)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 403
+    assert "PATCH operation not possible via API" == data["message"]
+
+
+@pytest.mark.django_db
+def test__street_is_read_only__delete(api_request, api_url, api_user):
+
+    street = StreetFactory.create()
+
+    view = StreetViewSet.as_view(actions={"delete": "destroy"})
+
+    request = api_request.delete(
+        f"{api_url}streets/",
+        content_type="application/json"
+    )
+    
+    force_authenticate(request, user=api_user)
+    response = view(request, street_slug=street.street_slug)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 403
+    assert "DELETE operation not possible via API" == data["message"]
