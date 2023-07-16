@@ -107,3 +107,95 @@ def test__get_street_instance(api_request, api_url, api_user):
     assert lambda n: "roesae-luexembuerg-straesse %d" % n == data["street_slug"]
     assert "05.03.1871" == data["eponym_date_of_birth"]
     assert "15.01.1919" == data["eponym_date_of_death"]
+
+
+@pytest.mark.django_db
+def test__district_is_read_only__post(api_request, api_url, api_user):
+    
+    district = DistrictFactory.create()
+
+    view = DistrictViewSet.as_view(actions={"post": "create"})
+
+    request = api_request.post(
+        f"{api_url}districts/",
+        content_type="application/json",
+        data=json.dumps({"name": district.name})
+    )
+    
+    force_authenticate(request, user=api_user)
+    response = view(request)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 403
+    assert "POST operation not possible via API" == data["message"]
+
+
+@pytest.mark.django_db
+def test__district_is_read_only__put(api_request, api_url, api_user):
+    
+    district = DistrictFactory.create()
+
+    view = DistrictViewSet.as_view(actions={"put": "update"})
+
+    request = api_request.put(
+        f"{api_url}districts/",
+        content_type="application/json",
+        data=json.dumps(
+            {
+                "name": "Mitte",
+                "image_path": "picture.jpeg"
+            }
+        )
+    )
+    
+    force_authenticate(request, user=api_user)
+    response = view(request, district_slug=district.district_slug)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 403
+    assert "PUT operation not possible via API" == data["message"]
+
+
+@pytest.mark.django_db
+def test__district_is_read_only__patch(api_request, api_url, api_user):
+    
+    district = DistrictFactory.create()
+
+    view = DistrictViewSet.as_view(actions={"patch": "partial_update"})
+
+    request = api_request.patch(
+        f"{api_url}districts/",
+        content_type="application/json",
+        data=json.dumps({"image_path": "picture.jpeg"})
+    )
+    
+    force_authenticate(request, user=api_user)
+    response = view(request, district_slug=district.district_slug)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 403
+    assert "PATCH operation not possible via API" == data["message"]
+
+
+@pytest.mark.django_db
+def test__district_is_read_only__delete(api_request, api_url, api_user):
+    
+    district = DistrictFactory.create()
+
+    view = DistrictViewSet.as_view(actions={"delete": "destroy"})
+
+    request = api_request.delete(
+        f"{api_url}districts/",
+        content_type="application/json"
+    )
+    
+    force_authenticate(request, user=api_user)
+    response = view(request, district_slug=district.district_slug)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 403
+    assert "DELETE operation not possible via API" == data["message"]
