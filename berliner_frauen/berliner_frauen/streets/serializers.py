@@ -24,7 +24,7 @@ class DistrictSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
-class StreetSerializer(serializers.ModelSerializer, TaggitSerializer):
+class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
     district = serializers.SerializerMethodField()
     district_slug = serializers.SerializerMethodField()
     tags = TagListSerializerField()

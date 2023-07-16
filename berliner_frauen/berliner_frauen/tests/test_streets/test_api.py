@@ -59,7 +59,7 @@ def test__get_district_instance(api_request, api_url, api_user):
 @pytest.mark.django_db
 def test__get_street_list(api_request, api_url, api_user):
 
-    StreetFactory.create_batch(3)
+    streets = StreetFactory.create_batch(3)
 
     view = StreetViewSet.as_view(actions={"get": "list"})
 
@@ -67,7 +67,7 @@ def test__get_street_list(api_request, api_url, api_user):
         f"{api_url}streets/",
         content_type="application/json"
     )
-    
+
     force_authenticate(request, user=api_user)
     response = view(request)
     response = response.render()
@@ -76,12 +76,22 @@ def test__get_street_list(api_request, api_url, api_user):
 
     assert response.status_code == 200
     for i in range(0, 3):
-        assert lambda n: "Rösä-Lüxembürg-Sträße %d" % n \
-              == data[i]["name"]
-        assert lambda n: "roesae-luexembuerg-straesse %d" % n == \
-            data[i]["street_slug"]
-        assert "05.03.1871" == data[i]["eponym_date_of_birth"]
-        assert "15.01.1919" == data[i]["eponym_date_of_death"]
+        for street in streets:
+            assert lambda n: "Rösä-Lüxembürg-Sträße %d" % n \
+                == data[i]["name"]
+            assert lambda n: "roesae-luexembuerg-straesse %d" % n == \
+                data[i]["street_slug"]
+            assert "https://www.openstreetmap.org/way/109819106" == \
+                data[i]["map_link"]
+            assert "Rosa Luxemburg" == data[i]["eponym_name"]
+            assert "05.03.1871" == data[i]["eponym_date_of_birth"]
+            assert "15.01.1919" == data[i]["eponym_date_of_death"]
+            assert "Zamość, Poland" == data[i]["eponym_place_of_birth"]
+            assert "Berlin, Germany" == data[i]["eponym_place_of_death"]
+            assert "<p>Ipsum suspendisse ultrices gravida</p>" == \
+                data[i]["eponym_description"]
+            assert "luxemburg_berlin.jpeg" == data[i]["image"]
+            # assert ["politics"] == data[i]["tags"]
 
 
 @pytest.mark.django_db
@@ -104,9 +114,18 @@ def test__get_street_instance(api_request, api_url, api_user):
 
     assert response.status_code == 200
     assert lambda n: "Rösä-Lüxembürg-Sträße %d" % n == data["name"]
-    assert lambda n: "roesae-luexembuerg-straesse %d" % n == data["street_slug"]
+    assert lambda n: "roesae-luexembuerg-straesse %d" % n == \
+        data["street_slug"]
+    assert "https://www.openstreetmap.org/way/109819106" == data["map_link"]
+    assert "Rosa Luxemburg" == data["eponym_name"]
     assert "05.03.1871" == data["eponym_date_of_birth"]
     assert "15.01.1919" == data["eponym_date_of_death"]
+    assert "Zamość, Poland" == data["eponym_place_of_birth"]
+    assert "Berlin, Germany" == data["eponym_place_of_death"]
+    assert "<p>Ipsum suspendisse ultrices gravida</p>" == \
+        data["eponym_description"]
+    assert "luxemburg_berlin.jpeg" == data["image"]
+    # assert ["politics"] == data["tags"]
 
 
 @pytest.mark.django_db
