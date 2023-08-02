@@ -38,6 +38,8 @@ class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
             "district_slug",
             "street_slug",
             "map_link",
+            "latitude",
+            "longitude",
             "eponym_name",
             "eponym_date_of_birth",
             "eponym_date_of_death",

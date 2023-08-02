@@ -45,6 +45,8 @@ class Street(models.Model):
         District, on_delete=models.CASCADE, related_name="streets"
     )
     map_link = models.URLField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     name = models.CharField(max_length=50)
     street_slug = models.CharField(max_length=50, blank=True, null=True)
     eponym_name = models.CharField(max_length=60)
