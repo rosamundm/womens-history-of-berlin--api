@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "streets",
+    "blog",
 
     "corsheaders",
     "django_extensions",
