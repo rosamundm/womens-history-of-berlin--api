@@ -12,10 +12,7 @@ def test__get_district_list(api_request, api_url, api_user):
 
     view = DistrictViewSet.as_view(actions={"get": "list"})
 
-    request = api_request.get(
-        f"{api_url}districts/",
-        content_type="application/json"
-    )
+    request = api_request.get(f"{api_url}districts/")
     
     force_authenticate(request, user=api_user)
     response = view(request)
@@ -39,10 +36,7 @@ def test__get_district_instance(api_request, api_url, api_user):
 
     view = DistrictViewSet.as_view(actions={"get": "retrieve"})
 
-    request = api_request.get(
-        f"{api_url}districts/",
-        content_type="application/json"
-    )
+    request = api_request.get(f"{api_url}districts/")
     
     force_authenticate(request, user=api_user)
     response = view(request, district_slug=district.district_slug)
@@ -63,10 +57,7 @@ def test__get_street_list(api_request, api_url, api_user):
 
     view = StreetViewSet.as_view(actions={"get": "list"})
 
-    request = api_request.get(
-        f"{api_url}streets/",
-        content_type="application/json"
-    )
+    request = api_request.get(f"{api_url}streets/")
 
     force_authenticate(request, user=api_user)
     response = view(request)
@@ -101,10 +92,7 @@ def test__get_street_instance(api_request, api_url, api_user):
 
     view = StreetViewSet.as_view(actions={"get": "retrieve"})
 
-    request = api_request.get(
-        f"{api_url}streets/",
-        content_type="application/json"
-    )
+    request = api_request.get(f"{api_url}streets/")
     
     force_authenticate(request, user=api_user)
     response = view(request, street_slug=street.street_slug)

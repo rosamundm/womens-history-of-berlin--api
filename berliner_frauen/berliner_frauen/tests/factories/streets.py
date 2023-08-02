@@ -28,4 +28,11 @@ class StreetFactory(factory.django.DjangoModelFactory):
     image_available = True
     eponym_core_data_added = True
     entry_complete = True
-    tags = ["politics", ],
+
+    # TODO how does this work with taggit?
+    # @factory.post_generation
+    # def tags(self, create, extracted, **kwargs):
+    #     if not create:
+    #         return
+    #     if extracted:
+    #         self.tags.add(*extracted)
