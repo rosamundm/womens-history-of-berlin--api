@@ -27,6 +27,7 @@ class DistrictSerializer(serializers.ModelSerializer):
 class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
     district = serializers.SerializerMethodField()
     district_slug = serializers.SerializerMethodField()
+    geocode = serializers.SerializerMethodField()
     tags = TagListSerializerField()
 
     class Meta:
@@ -38,8 +39,7 @@ class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
             "district_slug",
             "street_slug",
             "map_link",
-            "latitude",
-            "longitude",
+            "geocode",
             "eponym_name",
             "eponym_date_of_birth",
             "eponym_date_of_death",
@@ -56,3 +56,8 @@ class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
 
     def get_district_slug(self, obj):
         return obj.district.district_slug
+
+    def get_geocode(self, obj):
+        coords = obj.map_link.partition("@")[-1]
+        coords = coords.split(",")
+        return [float(coord) for coord in coords]
