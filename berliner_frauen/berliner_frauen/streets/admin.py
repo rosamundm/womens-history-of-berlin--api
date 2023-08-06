@@ -62,8 +62,16 @@ class StreetAdmin(admin.ModelAdmin):
 
     ordering = ("name",)
 
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super().get_form(request, obj=obj, change=change, **kwargs)
+        form.base_fields["map_link"].help_text = (
+            "If using a Google Maps link, omit surplus text after coordinates"
+        )
+        return form
+
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related("tags")
 
     def tag_list(self, obj):
         return u", ".join(tag.name for tag in obj.tags.all())
+
