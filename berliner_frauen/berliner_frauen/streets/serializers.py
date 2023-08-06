@@ -28,7 +28,6 @@ class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
     district = serializers.SerializerMethodField()
     district_slug = serializers.SerializerMethodField()
     geocode = serializers.SerializerMethodField()
-    geocode = serializers.SerializerMethodField()
     tags = TagListSerializerField()
 
     class Meta:
@@ -66,5 +65,3 @@ class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
         except ValueError:
             print("Error: please check that all coordinates are float[] type")
             return None
-
-
