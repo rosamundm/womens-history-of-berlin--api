@@ -28,6 +28,7 @@ class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
     district = serializers.SerializerMethodField()
     district_slug = serializers.SerializerMethodField()
     geocode = serializers.SerializerMethodField()
+    geocode = serializers.SerializerMethodField()
     tags = TagListSerializerField()
 
     class Meta:
