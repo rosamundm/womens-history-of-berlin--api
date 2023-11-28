@@ -181,3 +181,12 @@ SECURE_SSL_REDIRECT = False
 SECURE_HSTS_SECONDS = 86400
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_HSTS_PRELOAD = False
+
+
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn=env("DSN"),
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+)
