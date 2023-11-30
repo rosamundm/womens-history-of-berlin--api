@@ -68,7 +68,19 @@ class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
             return None
 
 
+class StreetBasicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Street
+        fields = ("name", "street_slug")
+
+
 class TagSerializer(serializers.ModelSerializer):
+    streets = serializers.SerializerMethodField()
+
     class Meta:
         model = Tag
-        fields = ("id", "name", "slug")
+        fields = ("id", "name", "slug", "streets")
+
+    def get_streets(self, obj):
+        queryset = Street.objects.filter(tags__name=obj.name)
+        return [StreetBasicSerializer(street).data for street in queryset]
