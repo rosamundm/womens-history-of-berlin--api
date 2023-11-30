@@ -1,8 +1,8 @@
 import json
 import pytest
 from rest_framework.test import force_authenticate
-from tests.factories.streets import DistrictFactory, StreetFactory
-from streets.views import DistrictViewSet, StreetViewSet
+from tests.factories.streets import DistrictFactory, StreetFactory, TagFactory
+from streets.views import DistrictViewSet, StreetViewSet, TagViewSet
 
 
 @pytest.mark.django_db
@@ -314,3 +314,44 @@ def test__street_is_read_only__delete(api_request, api_url, api_user):
 
     assert response.status_code == 403
     assert "DELETE operation not possible via API" == data["message"]
+
+
+@pytest.mark.django_db
+def test__get_tag_list(api_request, api_url, api_user):
+
+    TagFactory.create_batch(2)
+
+    view = TagViewSet.as_view(actions={"get": "list"})
+
+    request = api_request.get(f"{api_url}tags/")
+
+    force_authenticate(request, user=api_user)
+    response = view(request)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 200
+
+    assert "my tag 0" == data[0]["name"]
+    assert "my-tag-0" == data[0]["slug"]
+    assert "my tag 1" == data[1]["name"]
+    assert "my-tag-1" == data[1]["slug"]
+
+
+@pytest.mark.django_db
+def test__get_tag_instance(api_request, api_url, api_user):
+
+    tag = TagFactory.create(name="a tag")
+
+    view = TagViewSet.as_view(actions={"get": "retrieve"})
+
+    request = api_request.get(f"{api_url}tags/")
+
+    force_authenticate(request, user=api_user)
+    response = view(request, slug=tag.slug)
+    data = json.dumps(response.data)
+    data = json.loads(data)
+
+    assert response.status_code == 200
+    assert "a tag" == data["name"]
+    assert "a-tag" == data["slug"]

@@ -1,8 +1,9 @@
 from rest_framework import filters, permissions, status, viewsets
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from taggit.models import Tag
 from .models import District, Street
-from .serializers import DistrictSerializer, StreetSerializer
+from .serializers import DistrictSerializer, StreetSerializer, TagSerializer
 
 
 class DistrictViewSet(viewsets.ModelViewSet):
@@ -73,3 +74,12 @@ class StreetViewSet(viewsets.ModelViewSet):
             {"message": "DELETE operation not possible via API"},
             status=status.HTTP_403_FORBIDDEN
         )
+
+
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    lookup_field = "slug"
+    authentication_class = JWTAuthentication
+    permission_classes = [permissions.IsAuthenticated]
+    pagination_class = None

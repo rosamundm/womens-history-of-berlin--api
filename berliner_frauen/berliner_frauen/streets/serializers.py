@@ -1,5 +1,6 @@
 from .models import District, Street
 from rest_framework import serializers
+from taggit.models import Tag
 from taggit.serializers import TagListSerializerField, TaggitSerializer
 
 
@@ -65,3 +66,9 @@ class StreetSerializer(TaggitSerializer, serializers.ModelSerializer):
         except ValueError:
             print("Error: please check that all coordinates are float[] type")
             return None
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ("id", "name", "slug")

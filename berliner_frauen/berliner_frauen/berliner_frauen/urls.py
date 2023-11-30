@@ -15,6 +15,8 @@ from blog import views as blog_views
 router = routers.DefaultRouter()
 router.register(r"districts", streets_views.DistrictViewSet)
 router.register(r"streets", streets_views.StreetViewSet)
+router.register(r"tags", streets_views.TagViewSet)
+
 router.register(r"blog", blog_views.BlogPostViewSet)
 
 district_router = routers.NestedSimpleRouter(
