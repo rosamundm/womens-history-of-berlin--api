@@ -1,5 +1,6 @@
 import datetime
 import factory
+from taggit.models import Tag
 from streets.models import District, Street
 
 
@@ -28,3 +29,10 @@ class StreetFactory(factory.django.DjangoModelFactory):
     image_available = True
     eponym_core_data_added = True
     entry_complete = True
+
+
+class TagFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Tag
+
+    name = factory.Sequence(lambda n: "my tag %d" % n)
