@@ -11,12 +11,15 @@ from rest_framework_simplejwt.views import (
 from streets import views as streets_views
 from blog import views as blog_views
 
+"""
+django-extensions
+run `./manage.py show_urls` to see all patterns
+"""
 
 router = routers.DefaultRouter()
 router.register(r"districts", streets_views.DistrictViewSet)
 router.register(r"streets", streets_views.StreetViewSet)
 router.register(r"tags", streets_views.TagViewSet)
-
 router.register(r"blog", blog_views.BlogPostViewSet)
 
 district_router = routers.NestedSimpleRouter(
