@@ -75,11 +75,17 @@ class StreetByTagSerializer(serializers.ModelSerializer):
 
 
 class TagSerializer(serializers.ModelSerializer):
+    count = serializers.SerializerMethodField()
     streets = serializers.SerializerMethodField()
 
     class Meta:
         model = Tag
-        fields = ("id", "name", "slug", "streets")
+        fields = ("id", "name", "slug", "streets", "count")
+
+    def get_count(self, obj):
+        queryset = Street.objects.filter(tags__name=obj.name)
+        queryset = queryset.exclude(entry_complete=False).order_by("name")
+        return queryset.count()
 
     def get_streets(self, obj):
         queryset = Street.objects.filter(tags__name=obj.name)
