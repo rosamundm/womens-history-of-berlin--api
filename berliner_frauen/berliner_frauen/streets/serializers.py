@@ -84,10 +84,12 @@ class TagSerializer(serializers.ModelSerializer):
 
     def get_count(self, obj):
         queryset = Street.objects.filter(tags__name=obj.name)
-        queryset = queryset.exclude(entry_complete=False).order_by("name")
+        queryset = queryset.exclude(entry_complete=False)
         return queryset.count()
 
     def get_streets(self, obj):
         queryset = Street.objects.filter(tags__name=obj.name)
-        queryset = queryset.exclude(entry_complete=False).order_by("name")
+        queryset = queryset.exclude(entry_complete=False)
+        queryset = queryset.values("name", "street_slug")
+        queryset = queryset.order_by("name")
         return [StreetByTagSerializer(street).data for street in queryset]
