@@ -78,7 +78,7 @@ class StreetViewSet(viewsets.ModelViewSet):
 
 
 class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tag.objects.all()
+    queryset = Tag.objects.exclude(name="[]")
     serializer_class = TagSerializer
     lookup_field = "slug"
     authentication_class = JWTAuthentication
