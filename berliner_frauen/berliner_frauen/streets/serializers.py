@@ -6,9 +6,7 @@ from taggit.serializers import TagListSerializerField, TaggitSerializer
 
 class DistrictSerializer(serializers.ModelSerializer):
     streets = serializers.SlugRelatedField(
-        many=True,
-        slug_field="street_slug",
-        queryset=Street.objects.all()
+        many=True, slug_field="street_slug", queryset=Street.objects.all()
     )
 
     class Meta:
@@ -20,7 +18,7 @@ class DistrictSerializer(serializers.ModelSerializer):
             "number_of_added_streets",
             "number_of_completed_streets",
             "streets",
-            "image_path"
+            "image_path",
         )
         read_only_fields = fields
 

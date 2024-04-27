@@ -13,9 +13,7 @@ class DistrictAdmin(admin.ModelAdmin):
 
     def entries_completed(self, obj):
         try:
-            divided = (
-                obj.number_of_completed_streets / obj.number_of_added_streets
-            )
+            divided = obj.number_of_completed_streets / obj.number_of_added_streets
             percentage = divided * 100
             percentage = round(percentage, 2)
             return f"{percentage}%"
@@ -24,9 +22,7 @@ class DistrictAdmin(admin.ModelAdmin):
 
     def entries_with_photos_taken(self, obj):
         try:
-            divided = (
-                obj.number_of_photos_taken / obj.number_of_added_streets
-            )
+            divided = obj.number_of_photos_taken / obj.number_of_added_streets
             percentage = divided * 100
             percentage = round(percentage, 2)
             return f"{percentage}%"
@@ -35,9 +31,7 @@ class DistrictAdmin(admin.ModelAdmin):
 
     def complete_from_available_photos(self, obj):
         try:
-            divided = (
-                obj.number_of_completed_streets / obj.number_of_photos_taken
-            )
+            divided = obj.number_of_completed_streets / obj.number_of_photos_taken
             percentage = divided * 100
             percentage = round(percentage, 2)
             return f"{percentage}%"
@@ -64,14 +58,13 @@ class StreetAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super().get_form(request, obj=obj, change=change, **kwargs)
-        form.base_fields["map_link"].help_text = (
-            "If using a Google Maps link, omit surplus text after coordinates"
-        )
+        form.base_fields[
+            "map_link"
+        ].help_text = "If using a Google Maps link, omit surplus text after coordinates"
         return form
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related("tags")
 
     def tag_list(self, obj):
-        return u", ".join(tag.name for tag in obj.tags.all())
-
+        return ", ".join(tag.name for tag in obj.tags.all())

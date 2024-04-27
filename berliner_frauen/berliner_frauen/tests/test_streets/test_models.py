@@ -12,7 +12,7 @@ def test__district_slug_generated():
 
 @pytest.mark.django_db
 def test__street_slug_generated():
-    
+
     street = StreetFactory.create(
         district=DistrictFactory.create(name="Mitte"),
         name="Rösä-Lüxembürg-Sträße",
@@ -20,7 +20,9 @@ def test__street_slug_generated():
         eponym_core_data_added=False,
         entry_complete=False,
         image_available=False,
-        tags=["politics", ],
+        tags=[
+            "politics",
+        ],
         map_link="https://www.openstreetmap.org/way/109819106",
     )
 
@@ -33,15 +35,17 @@ def test__district_number_of_added_streets():
     district = DistrictFactory.create(name="Mitte")
 
     StreetFactory.create_batch(
-       3,
-       district=district,
-       name="Rösä-Lüxembürg-Sträße",
-       eponym_name="Rosa Luxemburg",
-       eponym_core_data_added=False,
-       entry_complete=False,
-       image_available=False,
-       tags=["politics", ],
-       map_link="https://www.openstreetmap.org/way/109819106",
+        3,
+        district=district,
+        name="Rösä-Lüxembürg-Sträße",
+        eponym_name="Rosa Luxemburg",
+        eponym_core_data_added=False,
+        entry_complete=False,
+        image_available=False,
+        tags=[
+            "politics",
+        ],
+        map_link="https://www.openstreetmap.org/way/109819106",
     )
 
     assert district.number_of_added_streets == 3
@@ -53,27 +57,31 @@ def test__district_number_of_completed_streets():
     district = DistrictFactory.create(name="Mitte")
 
     StreetFactory.create_batch(
-       2,
-       district=district,
-       name="Rösä-Lüxembürg-Sträße",
-       eponym_name="Rosa Luxemburg",
-       eponym_core_data_added=False,
-       entry_complete=True,
-       image_available=False,
-       tags=["politics", ],
-       map_link="https://www.openstreetmap.org/way/109819106",
+        2,
+        district=district,
+        name="Rösä-Lüxembürg-Sträße",
+        eponym_name="Rosa Luxemburg",
+        eponym_core_data_added=False,
+        entry_complete=True,
+        image_available=False,
+        tags=[
+            "politics",
+        ],
+        map_link="https://www.openstreetmap.org/way/109819106",
     )
 
     StreetFactory.create_batch(
-       2,
-       district=district,
-       name="Rösä-Lüxembürg-Sträße",
-       eponym_name="Rosa Luxemburg",
-       eponym_core_data_added=False,
-       entry_complete=False,
-       image_available=False,
-       tags=["politics", ],
-       map_link="https://www.openstreetmap.org/way/109819106",
+        2,
+        district=district,
+        name="Rösä-Lüxembürg-Sträße",
+        eponym_name="Rosa Luxemburg",
+        eponym_core_data_added=False,
+        entry_complete=False,
+        image_available=False,
+        tags=[
+            "politics",
+        ],
+        map_link="https://www.openstreetmap.org/way/109819106",
     )
 
     assert district.number_of_completed_streets == 2
@@ -85,28 +93,31 @@ def test__district_number_of_photos_taken():
     district = DistrictFactory.create(name="Mitte")
 
     StreetFactory.create_batch(
-       10,
-       district=district,
-       name="Rösä-Lüxembürg-Sträße",
-       eponym_name="Rosa Luxemburg",
-       eponym_core_data_added=False,
-       entry_complete=True,
-       image_available=True,
-       tags=["politics", ],
-       map_link="https://www.openstreetmap.org/way/109819106",
+        10,
+        district=district,
+        name="Rösä-Lüxembürg-Sträße",
+        eponym_name="Rosa Luxemburg",
+        eponym_core_data_added=False,
+        entry_complete=True,
+        image_available=True,
+        tags=[
+            "politics",
+        ],
+        map_link="https://www.openstreetmap.org/way/109819106",
     )
 
     StreetFactory.create_batch(
-       1,
-       district=district,
-       name="Rösä-Lüxembürg-Sträße",
-       eponym_name="Rosa Luxemburg",
-       eponym_core_data_added=False,
-       entry_complete=True,
-       image_available=False,
-       tags=["politics", ],
-       map_link="https://www.openstreetmap.org/way/109819106",
+        1,
+        district=district,
+        name="Rösä-Lüxembürg-Sträße",
+        eponym_name="Rosa Luxemburg",
+        eponym_core_data_added=False,
+        entry_complete=True,
+        image_available=False,
+        tags=[
+            "politics",
+        ],
+        map_link="https://www.openstreetmap.org/way/109819106",
     )
 
     assert district.number_of_photos_taken == 10
-

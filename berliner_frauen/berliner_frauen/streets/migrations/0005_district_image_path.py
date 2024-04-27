@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('streets', '0004_remove_district_district_image_path'),
+        ("streets", "0004_remove_district_district_image_path"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='district',
-            name='image_path',
+            model_name="district",
+            name="image_path",
             field=models.CharField(blank=True, max_length=50, null=True),
         ),
     ]

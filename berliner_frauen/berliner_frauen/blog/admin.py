@@ -4,4 +4,8 @@ from .models import BlogPost
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ("title", "ready_to_publish", "published",)
+    list_display = (
+        "title",
+        "ready_to_publish",
+        "published",
+    )
