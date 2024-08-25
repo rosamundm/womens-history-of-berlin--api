@@ -1,4 +1,4 @@
-def slugify_umlauts(str: str) -> str:
+def slugify_umlauts(slug: str) -> str:
     umlaut_map = {
             ord("ä"): "ae",
             ord("Ä"): "ae",
@@ -7,4 +7,4 @@ def slugify_umlauts(str: str) -> str:
             ord("ü"): "ue",
             ord("Ü"): "ue",
     }
-    return str.translate(umlaut_map).replace(" ", "-").casefold()
+    return slug.translate(umlaut_map).replace(" ", "-").casefold()

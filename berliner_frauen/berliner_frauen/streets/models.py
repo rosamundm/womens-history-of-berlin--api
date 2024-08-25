@@ -1,4 +1,5 @@
 from django.db import models
+from .helpers import slugify_umlauts
 from tinymce.models import HTMLField
 from taggit.managers import TaggableManager
 
@@ -21,17 +22,7 @@ class District(models.Model):
         return self.streets.filter(image_available=True).count()
 
     def save(self, *args, **kwargs):
-        umlaut_map = {
-            ord("ä"): "ae",
-            ord("Ä"): "ae",
-            ord("ö"): "oe",
-            ord("Ö"): "oe",
-            ord("ü"): "ue",
-            ord("Ü"): "ue",
-        }
-        self.district_slug = (
-            self.name.translate(umlaut_map).replace(" ", "-").casefold()
-        )
+        self.district_slug = slugify_umlauts(self.name)
         super(District, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -50,8 +41,16 @@ class Street(models.Model):
     eponym_name = models.CharField(max_length=60)
     eponym_date_of_birth = models.DateField(null=True, blank=True)
     eponym_date_of_death = models.DateField(null=True, blank=True)
-    eponym_place_of_birth = models.CharField(max_length=50, null=True, blank=True)
-    eponym_place_of_death = models.CharField(max_length=50, null=True, blank=True)
+    eponym_place_of_birth = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True
+    )
+    eponym_place_of_death = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True
+    )
     eponym_description = HTMLField(null=True, blank=True)
     image = models.URLField(max_length=200, null=True, blank=True)
     image_available = models.BooleanField()
@@ -59,15 +58,7 @@ class Street(models.Model):
     last_edited = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        umlaut_map = {
-            ord("ä"): "ae",
-            ord("Ä"): "ae",
-            ord("ö"): "oe",
-            ord("Ö"): "oe",
-            ord("ü"): "ue",
-            ord("Ü"): "ue",
-        }
-        self.street_slug = self.name.translate(umlaut_map).replace(" ", "-").casefold()
+        self.street_slug = slugify_umlauts(self.name)
         super(Street, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
