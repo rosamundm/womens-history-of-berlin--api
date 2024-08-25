@@ -1,7 +1,7 @@
 from django.db import models
-from .helpers import slugify_umlauts
 from tinymce.models import HTMLField
 from taggit.managers import TaggableManager
+from .helpers import slugify_umlauts
 
 
 class District(models.Model):
