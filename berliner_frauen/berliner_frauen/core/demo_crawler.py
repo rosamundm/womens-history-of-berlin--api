@@ -1,4 +1,3 @@
-import datetime
 import requests
 import string
 from bs4 import BeautifulSoup
@@ -7,6 +6,8 @@ from bs4 import BeautifulSoup
 BASE_URL = "https://berlin.kauperts.de/"
 STREET_INDEX_URL = BASE_URL + "Strassenverzeichnis/"
 
+# Since all streets have been sourced, this script is kept here
+# for demonstrative purposes.
 
 for letter in string.ascii_uppercase:
     response = requests.get(STREET_INDEX_URL + letter)
