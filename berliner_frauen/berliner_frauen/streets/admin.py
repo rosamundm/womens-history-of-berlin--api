@@ -11,32 +11,33 @@ class DistrictAdmin(admin.ModelAdmin):
         "complete_from_available_photos",
     )
 
-    def entries_completed(self, obj):
+    def get_percentage(self, dividend: int, divisor: int) -> float | None:
         try:
-            divided = obj.number_of_completed_streets / obj.number_of_added_streets
-            percentage = divided * 100
-            percentage = round(percentage, 2)
-            return f"{percentage}%"
+            divided = dividend / divisor
+            return round(divided * 100, 2)
         except ZeroDivisionError:
-            return "Unknown"
+            return None
 
-    def entries_with_photos_taken(self, obj):
-        try:
-            divided = obj.number_of_photos_taken / obj.number_of_added_streets
-            percentage = divided * 100
-            percentage = round(percentage, 2)
+    def entries_completed(self, obj: District) -> str:
+        if isinstance((percentage := self.get_percentage(
+            obj.number_of_completed_streets, obj.number_of_added_streets
+        )), float):
             return f"{percentage}%"
-        except ZeroDivisionError:
-            return "Unknown"
+        return "Unknown"
 
-    def complete_from_available_photos(self, obj):
-        try:
-            divided = obj.number_of_completed_streets / obj.number_of_photos_taken
-            percentage = divided * 100
-            percentage = round(percentage, 2)
+    def entries_with_photos_taken(self, obj: District) -> str:
+        if isinstance((percentage := self.get_percentage(
+            obj.number_of_photos_taken, obj.number_of_added_streets
+        )), float):
             return f"{percentage}%"
-        except ZeroDivisionError:
-            return "Unknown"
+        return "Unknown"
+
+    def complete_from_available_photos(self, obj: District) -> str:
+        if isinstance((percentage := self.get_percentage(
+            obj.number_of_completed_streets, obj.number_of_photos_taken
+        )), float):
+            return f"{percentage}%"
+        return "Unknown"
 
 
 @admin.register(Street)
