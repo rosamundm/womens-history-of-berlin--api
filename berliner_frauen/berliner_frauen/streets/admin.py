@@ -52,9 +52,8 @@ class StreetAdmin(admin.ModelAdmin):
         "tag_list",
         "last_edited",
     )
-
     list_filter = ("district", "entry_complete", "image_available")
-
+    search_fields = ("name",)
     ordering = ("name",)
 
     def get_form(self, request, obj=None, change=False, **kwargs):
