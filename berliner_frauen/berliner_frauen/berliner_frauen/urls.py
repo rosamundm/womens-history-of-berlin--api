@@ -10,6 +10,7 @@ from rest_framework_simplejwt.views import (
 )
 from streets import views as streets_views
 from blog import views as blog_views
+from pages import views as page_views
 
 """
 django-extensions
@@ -21,6 +22,7 @@ router.register(r"districts", streets_views.DistrictViewSet)
 router.register(r"streets", streets_views.StreetViewSet)
 router.register(r"tags", streets_views.TagViewSet)
 router.register(r"blog", blog_views.BlogPostViewSet)
+router.register(r"pages", page_views.PageViewSet)
 
 district_router = routers.NestedSimpleRouter(router, r"districts", lookup="district")
 district_router.register("streets", streets_views.StreetViewSet, basename="streets")

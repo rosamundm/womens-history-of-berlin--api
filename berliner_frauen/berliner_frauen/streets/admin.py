@@ -11,7 +11,7 @@ class DistrictAdmin(admin.ModelAdmin):
         "complete_from_available_photos",
     )
 
-    def get_percentage(self, dividend: int, divisor: int) -> float | None:
+    def get_percentage(self, dividend: int, divisor: int):
         try:
             divided = dividend / divisor
             return round(divided * 100, 2)

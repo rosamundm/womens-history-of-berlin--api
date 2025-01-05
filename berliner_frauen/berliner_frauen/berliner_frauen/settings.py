@@ -28,8 +28,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "streets",
     "blog",
+    "pages",
+
     "corsheaders",
     "django_extensions",
     "rest_framework",
