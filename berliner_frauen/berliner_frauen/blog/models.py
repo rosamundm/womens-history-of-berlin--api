@@ -11,5 +11,6 @@ class BlogPost(models.Model):
     ready_to_publish = models.BooleanField()
 
     def save(self, *args, **kwargs):
-        self.slug = str(uuid.uuid4())
+        if not self.pk:
+            self.slug = str(uuid.uuid4())
         super(BlogPost, self).save(*args, **kwargs)
