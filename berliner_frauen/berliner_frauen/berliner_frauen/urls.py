@@ -1,6 +1,7 @@
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin as standard_admin
 from django_otp.admin import OTPAdminSite
 from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
 from django_otp.plugins.otp_totp.models import TOTPDevice
@@ -38,7 +39,7 @@ if TOTPDevice not in custom_admin._registry:
     custom_admin.register(TOTPDevice, TOTPDeviceAdmin)
 
 # register other models from default admin to custom admin
-for model_cls, model_admin in custom_admin._registry.items():
+for model_cls, model_admin in standard_admin.site._registry.items():
     if model_cls not in custom_admin._registry:
         custom_admin.register(model_cls, model_admin.__class__)
 
