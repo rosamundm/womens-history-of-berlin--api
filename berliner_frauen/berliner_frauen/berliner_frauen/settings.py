@@ -19,6 +19,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+if DEBUG:
+    ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
 
 INSTALLED_APPS = [
@@ -32,6 +34,7 @@ INSTALLED_APPS = [
     "streets",
     "blog",
     "pages",
+    "account",
 
     "corsheaders",
     "django_extensions",
@@ -40,6 +43,11 @@ INSTALLED_APPS = [
     "tinymce",
     "drf_spectacular",
     "taggit",
+
+    "django_otp",
+    "django_otp.plugins.otp_static",
+    "django_otp.plugins.otp_totp",
+    "django_otp.plugins.otp_email",
 ]
 
 MIDDLEWARE = [
@@ -52,6 +60,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_otp.middleware.OTPMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
 ]
 
 ROOT_URLCONF = "berliner_frauen.urls"
@@ -73,6 +85,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "berliner_frauen.wsgi.application"
+
+AUTH_USER_MODEL = "account.CustomUser"
 
 
 # Database
@@ -184,9 +198,8 @@ SECURE_HSTS_SECONDS = 86400
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_HSTS_PRELOAD = False
 
-
+# Sentry
 import sentry_sdk
-
 sentry_sdk.init(
     dsn=env("DSN"),
     traces_sample_rate=1.0,
